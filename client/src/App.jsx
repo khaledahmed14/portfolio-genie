@@ -1,6 +1,9 @@
-import Navbar from './Navbar'
+import Navbar from "./components/Navbar";
+
 export default function App() {
   return (
-    <Navbar/>
+    <div className="min-h-screen w-full bg-[#030712] text-white">
+      <Navbar />
+    </div>
   );
 }
