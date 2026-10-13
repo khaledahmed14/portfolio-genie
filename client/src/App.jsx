@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import GitHubBtn from "./components/GitHubBtn";
 import AuthHero from "./components/AuthHero";
+import EmailForm from "./components/EmailForm";
 
 export default function App() {
   return (
@@ -23,11 +24,11 @@ export default function App() {
       <div className="sticky top-0 z-10">
         <Navbar />
       </div>
-
       <main className="relative z-10 flex flex-1 flex-col items-center justify-between px-4 py-8">
         <div className="flex w-full max-w-2xl flex-1 flex-col items-center justify-center text-center">
           <AuthHero /> 
           <GitHubBtn />
+          <div className="text-start mt-6"><EmailForm/></div>
           
           <div className="py-8 text-gray-400"></div>
         </div>
