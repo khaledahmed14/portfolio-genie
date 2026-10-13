@@ -3,7 +3,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 export default function EmailForm() {
   return (
-    <div className="email-form flex flex-col gap-4 rounded-xl bg-[#1E293B99] border border-[#60A5FA33] w-[470px] px-6 py-6">
+    <div className="email-form mx-auto flex flex-col gap-4 rounded-xl bg-[#1E293B99] border border-[#60A5FA33] w-[90%] md:w-[470px] lg:w-[470px] px-6 py-6">
       <div className="flex flex-col gap-2">
         <label htmlFor="email-input" className="text-[#ffffff] font-semibold text-[13px]">Email</label>
         <div className="w-full gap-2 flex items-center border border-[#94A3B840] bg-[#03071299] rounded-xl px-4 py-[12px]">

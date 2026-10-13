@@ -1,5 +1,5 @@
 import React from "react";
-import vector1 from "../assets/Vector.png";
+import logo from "../assets/logo.png";
 
 const STEPS = [
   { id: 1, subLabel: "STEP 1", label: "Auth" },
@@ -12,16 +12,15 @@ export default function Navbar({ currentStep = 1, setCurrentStep }) {
   return (
     <header className="flex h-[72px] w-full items-center border-b border-gray-800 bg-[#0b0f19] px-[4%]">
       <div className="flex w-full items-center justify-between">
-        <div className="flex shrink-0 items-center gap-[0.75rem]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-[#2563EB] to-[#006BD4] shadow-lg shadow-blue-600/30">
-            <img
-              src={vector1}
-              alt="PortfolioGenie logo"
-              className="h-1/2 w-1/2 object-contain"
-            />
-          </div>
-          <span className="hidden text-[22px] font-bold leading-none tracking-tight text-white sm:inline">
-            PortfolioGenie
+        <div className="flex shrink-0 items-center gap-0">
+          <img
+            src={logo}
+            alt="PortfolioGenie logo"
+            className="w-25 h-15 flex items-center justify-center  "
+          />
+
+          <span className="hidden text-[22px] font-bold  font-['Trebuchet_MS'] leading-none tracking-tight text-white sm:inline">
+            Venom<span className="text-cyan-400">Ai</span>
           </span>
         </div>
         <nav aria-label="Progress" className="w-[70%] lg:w-[62%]">
