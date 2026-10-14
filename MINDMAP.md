@@ -1,16 +1,14 @@
-# 🧠 PortfolioGenie - Project Mind Map & Roadmap
-
-```text
-PortfolioGenie
+Venom AI - Project Mind Map & Roadmap
+Venom AI (formerly PortfolioGenie)
 │
 ├── 1. Core Architecture & Setup
 │   ├── Monorepo Structure (Client & Server folders)
 │   ├── Git Version Control & GitHub Repository Sync
-│   └── Design Tokens & CSS Variables (Cyber-Luxury Theme)
+│   └── Design Tokens & CSS Variables (Cyber-Luxury Sapphire/Cyan Theme)
 │
 ├── 2. User Authentication (Step 1)
 │   ├── GitHub OAuth Integration / Simulated Login
-│   ├── Email & Password Registration Form
+│   ├── Email & Password Registration Form (AuthHero & EmailForm)
 │   └── Validation & Session State Management
 │
 ├── 3. Data Intake & Profile Sync (Step 2)
@@ -26,11 +24,13 @@ PortfolioGenie
 │
 ├── 5. Output, Export & Deployment (Step 4)
 │   ├── Live Responsive Preview (Desktop 1440px vs Mobile views)
-│   ├── Single-file HTML/CSS/JS Code Bundle Export (.html download)
-│   ├── Figma Layout JSON Structure Export
 │   └── Simulated Cloud Deployment (Vercel / Netlify live URL generation)
 │
-└── 6. Future Backend Scale (Phase 2)
+├── 6. DEPI Documentation & Deliverables (Oct 16 / Nov 6)
+│   ├── Project Planning & Management (PROJECT_PLAN.md)
+│   ├── Requirements Gathering & User Stories (REQUIREMENTS.md)
+│   └── System Analysis & Design (Scheduled for Nov 6)
+│
+└── 7. Future Backend Scale (Phase 2)
     ├── Node.js & Express API endpoints in TypeScript
     └── MongoDB Schemas for User Profiles & Saved Portfolios
-```
