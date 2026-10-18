@@ -1,49 +1,44 @@
-# PortfolioGenie
+# Venom AI 
+> Transform Your GitHub into a High-Impact Developer Portfolio in Seconds.
 
-تحويل حساب جيت هاب الخاص بك إلى بورتفوليو احترافي في ثوانٍ.
+##  Project Overview
+**Venom AI** is an intelligent, automated web platform tailored for developers, computer science students, and freelancers. The application connects directly with user profiles and repositories to analyze code activity, skills, and projects, instantly generating a professional, responsive, and recruiter-ready developer portfolio.
 
-# 🧞‍♂️ PortfolioGenie
-
-> Transform your GitHub profile into a high-impact developer portfolio in seconds.
-
-PortfolioGenie is a web-based platform designed for developers and creatives to seamlessly sync their GitHub profile and public repositories, customize their portfolio sections, arrange layout flow, and instantly generate or deploy a high-performance portfolio.
+Designed with a futuristic sapphire/cyan aesthetic and sleek dark-mode styling, Venom AI bridges the gap between raw code repositories and stunning visual presentations.
 
 ---
 
-## 🚀 Key Features
-
-1. **Authentication & Onboarding:** Secure sign-in via GitHub OAuth simulation or custom developer credentials.
-2. **GitHub Data Fetcher:** Instant synchronization of user repositories, star counts, fork data, followers, and profile metadata.
-3. **Information Intake & Bio Editor:** Clean management of professional title, bio, tech stack tags, and social links.
-4. **Interactive Customizer (The Builder):** Reorder portfolio sections (Hero, About, Projects, Experience, Skills, Contact), adjust featured project card quantities, and toggle UI elements live.
-5. **Multi-Format Export & Deployment:**
-   - Single-file HTML/CSS/JS code bundle export.
-   - Structured JSON export for Figma integration.
-   - Simulated instant deployment with live preview switcher (Desktop / Mobile views).
+##  Core Features
+* **Automated GitHub Ingestion:** Seamlessly links and fetches repository statistics, languages, and project descriptions.
+* **AI-Powered Customization:** Generates optimized summaries, SEO copy, and professional layouts tailored to each developer.
+* **Futuristic UI/UX:** Built with React, Vite, and Tailwind CSS featuring high-contrast sapphire/cyan glowing accents and crystal-inspired branding.
+* **1-Click Deployment:** Allows developers to deploy and share their generated portfolios instantly.
+* **Interactive Multi-Step Wizard:** Guides users smoothly from authentication and intake to customization and preview.
 
 ---
 
-## 🛠️ Tech Stack
-
-- **Frontend:** React, Vite, Modern CSS (Cyber-Luxury Aesthetic: Matte Black `#030712`, Electric Blue `#2563EB`).
-- **Backend (Planned):** Node.js, Express, TypeScript, MongoDB.
-- **Tools:** Git & GitHub, Figma (Design System & Product Flow).
+##  Team X (Contributors)
+* **Khaled Ahmed** - Team Leader & Frontend Developer (`khaledahmed14`)
+* **Amr Elsayed** - UI/UX & Frontend Contributor (`amre3639-ux`)
+* **Lujain Kamel** - Developer & Collaborator (`guthip387`)
+* **Heba Khedr** - Developer & Frontend Contributor (`HebaKhedr`)
+* **Mayar Farid** - Documentation & QA Contributor (`Mayar-Farid`)
 
 ---
 
-## 📂 Project Structure
+##  Technology Stack
+* **Frontend Library:** React (Vite build tool)
+* **Styling & Design:** Tailwind CSS (Custom sapphire/cyan theme)
+* **Language:** JavaScript (ES6+)
+* **Version Control:** Git & GitHub
 
-```text
-portfolio-genie/
-├── client/                     # React Frontend Application
-│   ├── src/
-│   │   ├── assets/             # SVGs & Visual Assets
-│   │   ├── components/         # Reusable Components (Common & Layout)
-│   │   ├── pages/              # Core App Pages (Auth, Intake, Builder, Preview)
-│   │   ├── services/           # API integrations & data helpers
-│   │   └── App.jsx             # Main Router & Step Controller
-│   ├── package.json
-│   └── vite.config.js
-├── server/                     # Backend API & Database (Node/TS/Express)
-└── README.md
-```
+---
+
+##  Getting Started & Local Installation
+
+To run this project locally on your machine, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/khaledahmed14/portfolio-genie.git](https://github.com/khaledahmed14/portfolio-genie.git)
+   cd portfolio-genie/client
