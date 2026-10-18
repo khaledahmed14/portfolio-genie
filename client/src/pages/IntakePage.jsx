@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar2 from "../components/navIntakePage";
 import Infocard from "../components/AdditinalInfoCard";
+import GithubFetcherCard from "../components/GithubFetcherCard";
 
 export default function IntakePage({ setCurrentStep }) {
   return (
@@ -10,12 +11,12 @@ export default function IntakePage({ setCurrentStep }) {
       
 
       {/* الجزء الثاني */}
-      <div className="rounded-xl border border-dashed border-gray-800 bg-[#0b0f19]/50 p-12 text-center text-gray-500">
-        لوجين وخالد component
+      <div >
+          <GithubFetcherCard/>
       </div>
 
       {/* الجزء الثالث */}
-      <div className="rounded-xl border border-dashed border-gray-800 bg-[#0b0f19]/50 p-12 text-center text-gray-500">
+      <div >
           <Infocard/>
       </div>
 
