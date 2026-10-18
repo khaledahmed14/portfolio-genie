@@ -1,170 +1,158 @@
+
 import { useState } from "react";
-import "./GithubFetcherCard.css";
 
 const repositories = [
-  { name: "portfolio-genie", language: "TypeScript", color: "#60a5fa", stars: 248 },
-  { name: "react-dashboard", language: "JavaScript", color: "#facc15", stars: 186 },
-  { name: "awesome-ui-kit", language: "CSS", color: "#c084fc", stars: 142 },
-  { name: "api-starter", language: "Python", color: "#4ade80", stars: 97 },
-  { name: "dev-tools", language: "TypeScript", color: "#60a5fa", stars: 64 },
+  { name: "portfolio-genie", language: "JavaScript", stars: 1280 },
+  { name: "react-dashboard", language: "TypeScript", stars: 640 },
+  { name: "api-starter", language: "Python", stars: 420 },
+  { name: "ui-components", language: "CSS", stars: 230 },
+  { name: "dev-tools", language: "JavaScript", stars: 150 },
 ];
 
-function GithubFetcherCard() {
-  const [githubUrl, setGithubUrl] = useState(
-    "https://github.com/alex-dev"
-  );
+const stats = [
+  { label: "Public repositories", value: "38" },
+  { label: "Followers", value: "2.4k" },
+  { label: "Total stars", value: "2.7k" },
+];
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
+export default function GithubFetcherCard() {
+  const [profileUrl, setProfileUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
 
-    // UI preview only. Connect the real GitHub fetching logic later.
-    setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 600);
-  };
+    if (!profileUrl.trim()) return;
+
+    // UI only: connect the real GitHub fetching logic later.
+    setLoading(true);
+    setTimeout(() => setLoading(false), 600);
+  }
 
   return (
-    <section className="github-fetcher">
-      <div className="github-fetcher__glow" />
+    <section className="w-full rounded-2xl border border-slate-700 bg-slate-950 p-5 text-slate-100 shadow-xl sm:p-7">
+      <header className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">
+          GitHub Data Fetcher
+        </h2>
+        <p className="mt-2 text-sm text-slate-400">
+          We read public data only. No write access is requested.
+        </p>
+      </header>
 
-      <div className="github-fetcher__content">
-        <header className="github-fetcher__header">
-          <div className="github-fetcher__heading">
-            <div className="github-fetcher__icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path d="M8 17c0-2 1.5-2.5 4-2.5s4 .5 4 2.5" />
-                <circle cx="12" cy="9" r="3" />
-              </svg>
-            </div>
+      <form
+        onSubmit={handleSubmit}
+        className="mb-7 flex flex-col gap-3 sm:flex-row"
+      >
+        <label htmlFor="github-profile-url" className="sr-only">
+          GitHub profile or repository URL
+        </label>
 
-            <div>
-              <h2>GitHub Data Fetcher</h2>
-              <p>
-                We read public data only. No write access is requested.
-              </p>
-            </div>
-          </div>
+        <input
+          id="github-profile-url"
+          type="url"
+          value={profileUrl}
+          onChange={(event) => setProfileUrl(event.target.value)}
+          placeholder="Enter GitHub profile or repository URL"
+          className="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+        />
 
-          <span className="github-fetcher__badge">
-            <span className="github-fetcher__badge-dot" />
-            PUBLIC DATA
-          </span>
-        </header>
-
-        <form
-          className="github-fetcher__form"
-          onSubmit={handleSubmit}
+        <button
+          type="submit"
+          disabled={loading || !profileUrl.trim()}
+          className="rounded-xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <label
-            className="github-fetcher__label"
-            htmlFor="github-profile-url"
+          {loading ? "Refreshing..." : "Re-fetch Data"}
+        </button>
+      </form>
+
+      <div className="mb-6 flex flex-col gap-4 rounded-xl border border-slate-800 bg-slate-900/70 p-4 sm:flex-row sm:items-center">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-lg font-bold text-cyan-300">
+          AD
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <h3 className="font-semibold text-white">Alex Developer</h3>
+          <p className="text-sm text-slate-400">@alex-dev</p>
+        </div>
+
+        <span className="w-fit rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+          <span className="mr-2 inline-block h-2 w-2 rounded-full bg-emerald-400" />
+          Active
+        </span>
+      </div>
+
+      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {stats.map((stat) => (
+          <div
+            key={stat.label}
+            className="rounded-xl border border-slate-800 bg-slate-900 p-4"
           >
-            GITHUB PROFILE OR REPOSITORY URL
-          </label>
-
-          <div className="github-fetcher__input-row">
-            <div className="github-fetcher__input-wrap">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="7" />
-                <path d="m16 16 4 4" />
-              </svg>
-
-              <input
-                id="github-profile-url"
-                type="url"
-                value={githubUrl}
-                onChange={(event) => setGithubUrl(event.target.value)}
-                placeholder="https://github.com/username"
-                required
-              />
-            </div>
-
-            <button
-              className="github-fetcher__button"
-              type="submit"
-              disabled={isRefreshing}
-            >
-              <svg
-                className={isRefreshing ? "is-spinning" : ""}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                aria-hidden="true"
-              >
-                <path d="M20 7v5h-5" />
-                <path d="M4 17v-5h5" />
-                <path d="M5.6 9A7 7 0 0 1 18 6l2 6" />
-                <path d="M18.4 15A7 7 0 0 1 6 18l-2-6" />
-              </svg>
-
-              {isRefreshing ? "Refreshing..." : "Re-fetch Data"}
-            </button>
+            <p className="text-sm text-slate-400">{stat.label}</p>
+            <p className="mt-2 text-2xl font-bold text-white">
+              {stat.value}
+            </p>
           </div>
-        </form>
+        ))}
+      </div>
 
-        <div className="github-fetcher__profile">
-          <div className="github-fetcher__avatar">AD</div>
-
-          <div className="github-fetcher__profile-info">
-            <span className="github-fetcher__eyebrow">
-              GITHUB ACCOUNT
-            </span>
-            <h3>Alex Developer</h3>
-            <p>@alex-dev</p>
-          </div>
-
-          <span className="github-fetcher__status">
-            <span />
-            Active
+      <div>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-lg font-semibold text-white">
+            Top repositories detected
+          </h3>
+          <span className="text-xs text-slate-500">
+            5 repositories
           </span>
         </div>
 
-        <div className="github-fetcher__stats">
-          <article className="github-fetcher__stat">
-            <div className="github-fetcher__stat-top">
-              <span>Public repositories</span>
-              <span className="github-fetcher__stat-icon blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                  <rect x="4" y="3" width="16" height="18" rx="2" />
-                  <path d="M8 7h8M8 11h8M8 15h4" />
+        <div className="space-y-3">
+          {repositories.map((repo) => (
+            <article
+              key={repo.name}
+              className="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-4 transition hover:border-slate-600 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex min-w-0 items-start gap-3">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-slate-400"
+                >
+                  <path
+                    d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10l2 2h6.5A1.5 1.5 0 0 1 20 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
                 </svg>
-              </span>
-            </div>
-            <strong>38</strong>
-            <small>Public projects</small>
-          </article>
 
-          <article className="github-fetcher__stat">
-            <div className="github-fetcher__stat-top">
-              <span>Followers</span>
-              <span className="github-fetcher__stat-icon purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                  <circle cx="9" cy="8" r="4" />
-                  <path d="M2 21v-2a7 7 0 0 1 14 0v2M17 4a4 4 0 0 1 0 8M19 14a5 5 0 0 1 3 5v2" />
+                <div className="min-w-0">
+                  <p className="break-words font-medium text-cyan-300">
+                    {repo.name}
+                  </p>
+                  <p className="mt-1 text-xs text-slate-400">
+                    {repo.language}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-sm text-slate-300 sm:shrink-0">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-4 w-4 text-amber-300"
+                >
+                  <path d="m12 2.8 2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.36l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93L12 2.8Z" />
                 </svg>
-              </span>
-            </div>
-            <strong>2.4k</strong>
-            <small>People following</small>
-          </article>
-
-          <article className="github-fetcher__stat">
-            <div className="github-fetcher__stat-top">
-              <span>Total stars</span>
-              <span className="github-fetcher__stat-icon yellow">
-                <svg viewBox="0 0 24 24" fill="none
+                {repo.stars.toLocaleString()}
+                <span className="text-xs text-slate-500">stars</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
