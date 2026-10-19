@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 const repositories = [
@@ -24,14 +23,13 @@ export default function GithubFetcherCard() {
 
     if (!profileUrl.trim()) return;
 
-    // UI only: connect the real GitHub fetching logic later.
     setLoading(true);
     setTimeout(() => setLoading(false), 600);
   }
 
   return (
     <section className="w-full rounded-2xl border border-slate-700 bg-slate-950 p-5 text-slate-100 shadow-xl sm:p-7">
-      <header className="mb-6">
+      <header className="mb-6 text-left">
         <h2 className="text-2xl font-bold tracking-tight">
           GitHub Data Fetcher
         </h2>
@@ -53,25 +51,25 @@ export default function GithubFetcherCard() {
           type="url"
           value={profileUrl}
           onChange={(event) => setProfileUrl(event.target.value)}
-          placeholder="Enter GitHub profile or repository URL"
-          className="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+          placeholder="https://github.com/alex-dev"
+          className="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
         />
 
         <button
           type="submit"
           disabled={loading || !profileUrl.trim()}
-          className="rounded-xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-500 hover:shadow-blue-500/50 active:scale-95"
         >
           {loading ? "Refreshing..." : "Re-fetch Data"}
         </button>
       </form>
 
       <div className="mb-6 flex flex-col gap-4 rounded-xl border border-slate-800 bg-slate-900/70 p-4 sm:flex-row sm:items-center">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-lg font-bold text-cyan-300">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-lg font-bold text-blue-300">
           AD
         </div>
 
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 text-left">
           <h3 className="font-semibold text-white">Alex Developer</h3>
           <p className="text-sm text-slate-400">@alex-dev</p>
         </div>
@@ -86,7 +84,7 @@ export default function GithubFetcherCard() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-slate-800 bg-slate-900 p-4"
+            className="rounded-xl border border-slate-800 bg-slate-900 p-4 text-left"
           >
             <p className="text-sm text-slate-400">{stat.label}</p>
             <p className="mt-2 text-2xl font-bold text-white">
@@ -127,8 +125,8 @@ export default function GithubFetcherCard() {
                   />
                 </svg>
 
-                <div className="min-w-0">
-                  <p className="break-words font-medium text-cyan-300">
+                <div className="min-w-0 text-left">
+                  <p className="break-words font-medium text-blue-300">
                     {repo.name}
                   </p>
                   <p className="mt-1 text-xs text-slate-400">

@@ -5,15 +5,15 @@ export default function GitHubBtn() {
 return (
     <div className="flex w-full max-w-[470px] flex-col gap-4">
     <div className="flex w-full flex-wrap items-center justify-center gap-2">
-        <span className="flex h-[30px] w-[128px] shrink-0 items-center justify-center whitespace-nowrap rounded-md border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
+        <span className="flex h-[30px] w-[128px] shrink-0 items-center justify-center whitespace-nowrap rounded-[20px] border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
         github.com/you
         </span>
 
-        <span className="flex h-[30px] w-[104px] shrink-0 items-center justify-center whitespace-nowrap rounded-md border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
+        <span className="flex h-[30px] w-[104px] shrink-0 items-center justify-center whitespace-nowrap rounded-[20px] border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
         AI SEO copy
         </span>
 
-        <span className="flex h-[30px] w-[128px] shrink-0 items-center justify-center whitespace-nowrap rounded-md border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
+        <span className="flex h-[30px] w-[128px] shrink-0 items-center justify-center whitespace-nowrap rounded-[20px] border border-slate-400/20 bg-slate-900/90 px-2 text-[13px] font-medium leading-[155%] text-cyan-200 [font-family:'JetBrains_Mono',monospace]">
         1-click deploy
         </span>
     </div>
