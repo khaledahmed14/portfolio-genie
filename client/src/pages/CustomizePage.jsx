@@ -19,7 +19,6 @@ export default function CustomizePage({ setCurrentStep }) {
           </div>
         </div>
         <div className="lg:col-span-7">
-          {/* <LiveStructure /> */}
           <LiveStructure />
         </div>
       </div>
