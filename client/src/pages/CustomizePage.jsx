@@ -36,7 +36,7 @@ export default function CustomizePage({ setCurrentStep }) {
           onClick={() => setCurrentStep(4)}
           className="flex items-center gap-2 rounded-xl bg-[#0EA5E9] px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_20px_rgba(14,165,233,0.4)] transition-all hover:bg-[#38BDF8] hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]"
         >
-          Generate Final Portfolio Code &#10024;
+          Generate Final Portfolio Code 
         </button>
       </div>
     </div>

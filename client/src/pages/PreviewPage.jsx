@@ -7,17 +7,10 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 export default function PreviewPage({ setCurrentStep }) {
   return (
     <div className="flex w-full flex-col gap-6 py-4">
-      {/* Top Section Header & SubNavbar */}
       <div className="w-full">
         <PreviewNavbar />
       </div>
-
-      {/* Code Injection Container Frame */}
       <CodeInjectionContainer />
-
-      {/* ====================================================================================
-       * [START: FIXED DOWNLOAD BUTTON]
-       * ==================================================================================== */}
       <div className="fixed bottom-6 right-6 z-50">
         <button
           type="button"
@@ -28,11 +21,6 @@ export default function PreviewPage({ setCurrentStep }) {
           <span className="whitespace-nowrap font-sans">Download Complete Source Code</span>
         </button>
       </div>
-      {/* ====================================================================================
-       * [END: FIXED DOWNLOAD BUTTON]
-       * ==================================================================================== */}
-
-      {/* Footer Actions & Tip */}
       <div className="mt-4 flex w-full flex-wrap items-center justify-between gap-4 border-t border-[#33415566] pt-6">
         <button
           type="button"
