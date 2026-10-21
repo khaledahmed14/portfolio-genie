@@ -8,14 +8,9 @@ export default function IntakePage({ setCurrentStep }) {
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-6">
       
        <Navbar2 setCurrentStep={setCurrentStep}/>
-      
-
-      {/* الجزء الثاني */}
       <div >
           <GithubFetcherCard/>
       </div>
-
-      {/* الجزء الثالث */}
       <div >
           <Infocard/>
       </div>
