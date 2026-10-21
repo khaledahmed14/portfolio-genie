@@ -1,5 +1,5 @@
 import React from "react";
-
+import LiveStructure from "../components/LiveStructure";
 export default function CustomizePage({ setCurrentStep }) {
   return (
     <div className="flex w-full flex-col gap-6 py-4">
@@ -20,9 +20,7 @@ export default function CustomizePage({ setCurrentStep }) {
         </div>
         <div className="lg:col-span-7">
           {/* <LiveStructure /> */}
-          <div className="flex h-full min-h-[500px] w-full items-center justify-center rounded-2xl border border-dashed border-[#60A5FA33] bg-[#1E293B4D] p-6 text-sm text-[#94A3B8]">
-            [ LiveStructure Component Placeholder - Mayar & Lojain ]
-          </div>
+          <LiveStructure />
         </div>
       </div>
       <div className="mt-4 flex w-full items-center justify-between border-t border-[#33415566] pt-6">
