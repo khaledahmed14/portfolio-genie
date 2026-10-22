@@ -122,6 +122,203 @@ export default function LiveStructure() {
             ))}
           </div>
         </section>
+
+        {/* Section 4: Work Experience */}
+        <section id="work-experience" className={sectionClass}>
+          <SectionHeader
+            number="4"
+            title="Work Experience"
+            meta="career journey"
+          />
+
+          <div className="space-y-3 pl-1 sm:pl-9">
+            <article className="rounded-[16px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-4 transition hover:border-[rgba(96,165,250,0.4)]">
+              <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
+                <div>
+                  <h3 className="text-sm font-semibold text-[#F1F5F9]">
+                    Front-End Developer Intern
+                  </h3>
+                  <p className="mt-1 text-xs text-[#67C8D8]">
+                    Tech Company
+                  </p>
+                </div>
+                <span className={`text-[11px] text-[#8290A8] ${monoFont}`}>
+                  2025 – Present
+                </span>
+              </div>
+              <p className="mt-3 text-xs leading-6 text-[#C0CAD8]">
+                Building responsive web interfaces using React, JavaScript,
+                and Tailwind CSS while improving usability and accessibility.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {["React", "JavaScript", "Tailwind CSS"].map((skill) => (
+                  <span
+                    key={skill}
+                    className={`rounded-full bg-[rgba(37,99,235,0.2)] px-2.5 py-1 text-[10px] text-[#93C5FD] ${monoFont}`}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </article>
+
+            <article className="rounded-[16px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-4 transition hover:border-[rgba(96,165,250,0.4)]">
+              <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
+                <div>
+                  <h3 className="text-sm font-semibold text-[#F1F5F9]">
+                    Personal Projects
+                  </h3>
+                  <p className="mt-1 text-xs text-[#67C8D8]">
+                    Independent Development
+                  </p>
+                </div>
+                <span className={`text-[11px] text-[#8290A8] ${monoFont}`}>
+                  Ongoing
+                </span>
+              </div>
+              <p className="mt-3 text-xs leading-6 text-[#C0CAD8]">
+                Creating web applications and exploring AI and cybersecurity
+                concepts through hands-on projects and continuous learning.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* Section 5: Technical Skills Grid */}
+        <section id="technical-skills" className={sectionClass}>
+          <SectionHeader
+            number="5"
+            title="Technical Skills"
+            meta="skills & tools"
+          />
+
+          <div className="grid grid-cols-1 gap-3 pl-1 sm:grid-cols-2 sm:pl-9">
+            {[
+              {
+                category: "Frontend Development",
+                skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap", "Tailwind CSS"],
+              },
+              {
+                category: "Programming Languages",
+                skills: ["Python", "C#", "JavaScript"],
+              },
+              {
+                category: "AI & Machine Learning",
+                skills: ["Machine Learning", "Model Training", "Data Analysis"],
+              },
+              {
+                category: "Tools & Platforms",
+                skills: ["Git", "GitHub", "VS Code", "Figma"],
+              },
+            ].map((group) => (
+              <article
+                key={group.category}
+                className="rounded-[16px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-3.5 transition hover:border-[rgba(96,165,250,0.4)]"
+              >
+                <h3 className="mb-3 text-xs font-semibold text-[#F1F5F9]">
+                  {group.category}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`rounded-full border border-[rgba(96,165,250,0.2)] bg-[rgba(37,99,235,0.15)] px-2.5 py-1.5 text-[10px] text-[#93C5FD] ${monoFont}`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Section 6: Contact & Social Links */}
+        <section id="contact" className={sectionClass}>
+          <SectionHeader
+            number="6"
+            title="Contact & Social Links"
+            meta="let's connect"
+          />
+
+          <div className="grid grid-cols-1 gap-2.5 pl-1 sm:grid-cols-2 sm:pl-9">
+            <a
+              href="mailto:hello@example.com"
+              className="flex items-center gap-3 rounded-[14px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-3 transition hover:border-[rgba(96,165,250,0.4)]"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(6,182,212,0.15)] text-sm text-[#67C8D8]">
+                @
+              </span>
+              <span className="min-w-0">
+                <span className="block text-xs font-medium text-[#F1F5F9]">
+                  Email
+                </span>
+                <span className="block break-all text-[11px] text-[#8290A8]">
+                  hello@example.com
+                </span>
+              </span>
+            </a>
+
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 rounded-[14px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-3 transition hover:border-[rgba(96,165,250,0.4)]"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.2)] text-sm text-[#93C5FD]">
+                GH
+              </span>
+              <span>
+                <span className="block text-xs font-medium text-[#F1F5F9]">
+                  GitHub
+                </span>
+                <span className="block text-[11px] text-[#8290A8]">
+                  View my repositories
+                </span>
+              </span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 rounded-[14px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-3 transition hover:border-[rgba(96,165,250,0.4)]"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.2)] text-xs font-bold text-[#93C5FD]">
+                in
+              </span>
+              <span>
+                <span className="block text-xs font-medium text-[#F1F5F9]">
+                  LinkedIn
+                </span>
+                <span className="block text-[11px] text-[#8290A8]">
+                  Connect professionally
+                </span>
+              </span>
+            </a>
+
+            <a
+              href="https://x.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 rounded-[14px] border border-[rgba(148,163,184,0.16)] bg-[rgba(3,7,18,0.6)] p-3 transition hover:border-[rgba(96,165,250,0.4)]"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(148,163,184,0.12)] text-xs font-bold text-[#C0CAD8]">
+                X
+              </span>
+              <span>
+                <span className="block text-xs font-medium text-[#F1F5F9]">
+                  Social Profile
+                </span>
+                <span className="block text-[11px] text-[#8290A8]">
+                  Follow my updates
+                </span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+
       </div>
     </div>
   );
