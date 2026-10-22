@@ -1,25 +1,26 @@
 import React from "react";
+import PreviewNavbar from "../components/PreviewNavbar";
+import CodeInjectionContainer from "../components/CodeInjectionContainer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 export default function PreviewPage({ setCurrentStep }) {
   return (
     <div className="flex w-full flex-col gap-6 py-4">
-      {/* Top Section Header & SubNavbar (عمرو) */}
       <div className="w-full">
-        {/* <PreviewNavbar /> */}
-        <div className="flex w-full items-center justify-between rounded-xl border border-dashed border-[#60A5FA33] bg-[#1E293B4D] p-4 text-sm text-[#94A3B8]">
-          [ PreviewNavbar Component Placeholder - Amr ]
-        </div>
+        <PreviewNavbar />
       </div>
-
-      {/* Code Injection Container Frame (عمرو) */}
-      <div className="w-full">
-        {/* <CodeInjectionContainer /> */}
-        <div className="flex min-h-[600px] w-full items-center justify-center rounded-2xl border border-dashed border-[#60A5FA33] bg-[#03071299] p-6 text-sm text-[#94A3B8]">
-          [ CodeInjectionContainer Placeholder - Amr ]
-        </div>
+      <CodeInjectionContainer />
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          type="button"
+          onClick={() => console.log("Downloading...")}
+          className="flex items-center gap-2.5 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-2xl transition-all hover:bg-blue-500 active:scale-95"
+        >
+          <FontAwesomeIcon icon={faDownload} className="text-xs" />
+          <span className="whitespace-nowrap font-sans">Download Complete Source Code</span>
+        </button>
       </div>
-
-      {/* Footer Actions & Tip */}
       <div className="mt-4 flex w-full flex-wrap items-center justify-between gap-4 border-t border-[#33415566] pt-6">
         <button
           type="button"
