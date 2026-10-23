@@ -1,6 +1,5 @@
 import React from "react";
 import LiveStructure from "../components/LiveStructure";
-import Arrangsetting from "../components/ArrangePortfolioSettings";
 import Arrangesettings from "../components/ArrangePortfolioSettings";
 export default function CustomizePage({ setCurrentStep }) {
   return (
@@ -15,7 +14,6 @@ export default function CustomizePage({ setCurrentStep }) {
       </div>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          {/* <ArrangePortfolioSettings /> */}
           <div className="flex h-fit min-h-[400px] w-full items-center justify-center rounded-2xl border  border-[#60A5FA33] bg-[#1E293B4D]  text-sm text-[#94A3B8]">
             <Arrangesettings/>
           </div>

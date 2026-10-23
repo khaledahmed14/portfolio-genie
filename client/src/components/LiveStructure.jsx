@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const projects = [
@@ -19,14 +18,20 @@ const sectionClass =
 function SectionHeader({ number, title, meta }) {
   return (
     <div className="mb-4 flex min-w-0 items-center gap-3">
-      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(37,99,235,1)] text-xs font-semibold text-white ${mainFont}`}>
+      <span
+        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(37,99,235,1)] text-xs font-semibold text-white ${mainFont}`}
+      >
         {number}
       </span>
-      <h2 className={`min-w-0 text-sm font-semibold text-[#F1F5F9] sm:text-base ${mainFont}`}>
+      <h2
+        className={`min-w-0 text-sm font-semibold text-[#F1F5F9] sm:text-base ${mainFont}`}
+      >
         {title}
       </h2>
       {meta && (
-        <span className={`ml-auto shrink-0 text-right text-[13px] font-medium leading-[155%] tracking-normal text-[#71819E] ${monoFont}`}>
+        <span
+          className={`ml-auto shrink-0 text-right text-[13px] font-medium leading-[155%] tracking-normal text-[#71819E] ${monoFont}`}
+        >
           {meta}
         </span>
       )}
@@ -41,7 +46,9 @@ export default function LiveStructure() {
     "Building scalable distributed systems with React, Node.js, and TypeScript. Passionate about UI design systems and developer tools. I turn product ideas into reliable, user-friendly experiences.";
 
   return (
-    <div className={`w-full rounded-[24px] border border-[rgba(96,165,250,0.16)] bg-[#111A29] p-4 text-[#E5E7EB] shadow-xl sm:p-6 ${mainFont}`}>
+    <div
+      className={`w-full rounded-[24px] border border-[rgba(96,165,250,0.16)] bg-[#111A29] p-4 text-[#E5E7EB] shadow-xl sm:p-6 ${mainFont}`}
+    >
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-[20px] font-bold leading-7 tracking-tight text-[#F1F5F9]">
@@ -68,19 +75,17 @@ export default function LiveStructure() {
               <h3 className="text-[14px] font-semibold leading-5 text-[#F1F5F9]">
                 {name}
               </h3>
-              <p className="mt-1 text-xs leading-4 text-[#8290A8]">
-                {role}
-              </p>
+              <p className="mt-1 text-xs leading-4 text-[#8290A8]">{role}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <a
                   href="#featured-projects"
-                  className="rounded-full border border-[rgba(6,182,212,0.5)] bg-[rgba(6,182,212,0.18)] px-3 py-1.5 text-[11px] leading-5 text-[#67C8D8] transition hover:bg-[rgba(6,182,212,0.28)]"
+                  className="rounded-full border border-[rgba(148,163,184,0.22)] bg-transparent px-3 py-1.5 text-[11px] leading-5 text-[#A6B0C1] transition hover:border-cyan-400 hover:bg-[rgba(6,182,212,0.1)] hover:text-[#67C8D8]"
                 >
                   View Featured Work
                 </a>
                 <a
                   href="mailto:hello@example.com"
-                  className="rounded-full border border-[rgba(148,163,184,0.22)] bg-transparent px-3 py-1.5 text-[11px] leading-5 text-[#A6B0C1] transition hover:border-slate-500"
+                  className="rounded-full border border-[rgba(148,163,184,0.22)] bg-transparent px-3 py-1.5 text-[11px] leading-5 text-[#A6B0C1] transition hover:border-cyan-400 hover:bg-[rgba(6,182,212,0.1)] hover:text-[#67C8D8]"
                 >
                   Get In Touch
                 </a>
@@ -90,7 +95,11 @@ export default function LiveStructure() {
         </section>
 
         <section className={sectionClass}>
-          <SectionHeader number="2" title="About Me" meta={`${bio.length} chars`} />
+          <SectionHeader
+            number="2"
+            title="About Me"
+            meta={`${bio.length} chars`}
+          />
           <p className="pl-1 text-xs leading-[1.7] text-[#C0CAD8] sm:pl-9 sm:text-sm">
             {bio}
           </p>
@@ -115,7 +124,9 @@ export default function LiveStructure() {
                   <span aria-hidden="true">★</span>
                   {project.stars}
                 </p>
-                <span className={`mt-2 inline-flex rounded-full bg-[rgba(37,99,235,0.2)] px-2.5 py-1 text-[11px] leading-4 text-[rgba(147,197,253,1)] ${monoFont}`}>
+                <span
+                  className={`mt-2 inline-flex rounded-full bg-[rgba(37,99,235,0.2)] px-2.5 py-1 text-[11px] leading-4 text-[rgba(147,197,253,1)] ${monoFont}`}
+                >
                   {project.tech}
                 </span>
               </article>
@@ -138,17 +149,15 @@ export default function LiveStructure() {
                   <h3 className="text-sm font-semibold text-[#F1F5F9]">
                     Front-End Developer Intern
                   </h3>
-                  <p className="mt-1 text-xs text-[#67C8D8]">
-                    Tech Company
-                  </p>
+                  <p className="mt-1 text-xs text-[#67C8D8]">Tech Company</p>
                 </div>
                 <span className={`text-[11px] text-[#8290A8] ${monoFont}`}>
                   2025 – Present
                 </span>
               </div>
               <p className="mt-3 text-xs leading-6 text-[#C0CAD8]">
-                Building responsive web interfaces using React, JavaScript,
-                and Tailwind CSS while improving usability and accessibility.
+                Building responsive web interfaces using React, JavaScript, and
+                Tailwind CSS while improving usability and accessibility.
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {["React", "JavaScript", "Tailwind CSS"].map((skill) => (
@@ -196,7 +205,14 @@ export default function LiveStructure() {
             {[
               {
                 category: "Frontend Development",
-                skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap", "Tailwind CSS"],
+                skills: [
+                  "HTML",
+                  "CSS",
+                  "JavaScript",
+                  "React",
+                  "Bootstrap",
+                  "Tailwind CSS",
+                ],
               },
               {
                 category: "Programming Languages",
@@ -317,13 +333,7 @@ export default function LiveStructure() {
             </a>
           </div>
         </section>
-
-
       </div>
     </div>
   );
 }
-
-
-
-
