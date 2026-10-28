@@ -21,6 +21,7 @@ export default function IntakePage({ setCurrentStep }) {
         </p>
 
         <button 
+          onClick={() => setCurrentStep(3)}
           className="flex items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-500 hover:shadow-blue-500/50 active:scale-95"
         >
           <span>Proceed to Portfolio Customization</span>

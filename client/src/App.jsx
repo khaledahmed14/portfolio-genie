@@ -6,7 +6,7 @@ import CustomizePage from "./pages/CustomizePage";
 import PreviewPage from "./pages/PreviewPage";
 
 export default function App() {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(2);
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip bg-[#030712] font-sans text-white selection:bg-blue-500 selection:text-white">
