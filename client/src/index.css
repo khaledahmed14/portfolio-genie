@@ -1,14 +1,71 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Space+Mono:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-mono: "Space Mono", monospace;
   --font-sans: "Inter", sans-serif;
+
+  --color-venom-bg: var(--bg-main);
+  --color-venom-header: var(--bg-header);
+  --color-venom-card: var(--bg-card);
+  --color-venom-card-hover: var(--bg-card-hover);
+  --color-venom-input: var(--bg-input);
+  --color-venom-text: var(--text-primary);
+  --color-venom-secondary: var(--text-secondary);
+  --color-venom-muted: var(--text-muted);
+  --color-venom-border: var(--border-color);
+  
+  --color-venom-gold: var(--gold-primary);
+  --color-venom-gold-hover: var(--gold-hover);
+}
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-header: #0f172a;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-color: #e2e8f0;
+
+  --gold-primary: #d97706;
+  --gold-hover: #b45309;
+  --gold-glow: rgba(217, 119, 6, 0.25);
+  --gold-gradient: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+}
+
+.dark {
+  --bg-main: #07090e;
+  --bg-header: #0d111a;
+  --bg-card: #111622;
+  --bg-card-hover: #192131;
+  --bg-input: #090c12;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --border-color: #1f293d;
+
+  --gold-primary: #f59e0b;
+  --gold-hover: #fbbf24;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+  --gold-gradient: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #92400e 100%);
 }
 
 body {
-  @apply bg-black text-white;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 html {
@@ -18,10 +75,17 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
-@import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+.gold-glow {
+  box-shadow: 0 0 20px var(--gold-glow);
+}
 
-body {
-  @apply bg-slate-950 text-slate-100;
+.gold-glow-sm {
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.gold-text-gradient {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

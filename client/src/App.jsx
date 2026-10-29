@@ -7,7 +7,7 @@ import PreviewPage from "./pages/PreviewPage";
 import { ThemeProvider } from "./context/ThemeContext";
 
 export default function App() {
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(4);
 
   return (
     <ThemeProvider>
