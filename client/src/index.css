@@ -18,3 +18,10 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply bg-slate-950 text-slate-100;
+}

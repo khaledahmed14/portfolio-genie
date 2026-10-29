@@ -1,22 +1,21 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHashtag, faRocket } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHashtag, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 export default function PreviewNavbar({
   onExportFigma,
   onDeploy,
 }) {
   return (
-    <div className="w-full rounded-2xl border border-white/10 bg-[#070c18] p-6 shadow-2xl backdrop-blur-md">
+    <div className="w-full rounded-2xl border border-amber-500/20 bg-slate-900/60 dark:bg-black/60 p-6 shadow-2xl backdrop-blur-md transition-colors duration-300">
       <div className="flex flex-row items-center justify-between gap-4">
         
         <div className="min-w-0">
-        
-          <span className="font-step block text-[11px] font-bold tracking-[0.25em] text-[#00f2fe] uppercase">
+          <span className="font-step block text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase">
             STEP 4 &bull; EXPORT & PREVIEW
           </span>
 
-          <h2 className="font-heading mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl truncate">
+          <h2 className="font-heading mt-1 text-2xl font-bold tracking-tight text-slate-100 sm:text-3xl truncate">
             Your portfolio is ready
           </h2>
         </div>
@@ -25,16 +24,15 @@ export default function PreviewNavbar({
           <button
             type="button"
             onClick={onExportFigma}
-            className="font-heading flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-slate-800/60 px-4 py-3 text-sm font-semibold text-gray-200 transition-all hover:bg-slate-700 hover:text-white active:scale-95"
+            className="font-heading flex items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-slate-950/80 dark:bg-black/80 px-4 py-3 text-sm font-semibold text-slate-200 transition-all hover:border-amber-400 hover:bg-amber-500/10 hover:text-white active:scale-95"
           >
-            <FontAwesomeIcon icon={faHashtag} className="text-xs text-gray-400" />
+            <FontAwesomeIcon icon={faHashtag} className="text-xs text-amber-400" />
             <span className="whitespace-nowrap">Export Structure to Figma</span>
           </button>
-
           <button
             type="button"
             onClick={onDeploy}
-            className="font-heading flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] active:scale-95"
+            className="font-heading flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5)] active:scale-95"
           >
             <span className="whitespace-nowrap">Deploy to Live Server</span>
             <FontAwesomeIcon icon={faRocket} className="text-xs" />

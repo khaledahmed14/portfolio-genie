@@ -1,40 +1,41 @@
 import React from "react";
 import LiveStructure from "../components/LiveStructure";
 import Arrangesettings from "../components/ArrangePortfolioSettings";
+
 export default function CustomizePage({ setCurrentStep }) {
   return (
-    <div className="flex w-full flex-col gap-6 py-4">
+    <div className="flex w-full flex-col gap-6 py-4 transition-colors duration-300">
       <div className="flex flex-col gap-1 text-left">
-        <span className="text-xs font-semibold tracking-wider text-[#38BDF8] uppercase">
+        <span className="text-xs font-semibold tracking-wider text-amber-400 uppercase">
           STEP 3 · CUSTOMIZE
         </span>
-        <h1 className="text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
           Arrange your portfolio
         </h1>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <div className="flex h-fit min-h-[400px] w-full items-center justify-center rounded-2xl border  border-[#60A5FA33] bg-[#1E293B4D]  text-sm text-[#94A3B8]">
-            <Arrangesettings/>
+          <div className="flex h-fit min-h-[400px] w-full items-center justify-center rounded-2xl border border-amber-500/20 bg-slate-900/40 dark:bg-black/40 backdrop-blur-md text-sm text-slate-400">
+            <Arrangesettings />
           </div>
         </div>
         <div className="lg:col-span-7">
           <LiveStructure />
         </div>
       </div>
-      <div className="mt-4 flex w-full items-center justify-between border-t border-[#33415566] pt-6">
+      
+      <div className="mt-4 flex w-full items-center justify-between border-t border-slate-800 pt-6">
         <button
           type="button"
           onClick={() => setCurrentStep(2)}
-          className="flex items-center gap-2 rounded-xl border border-[#94A3B833] bg-[#03071299] px-5 py-2.5 text-sm font-medium text-[#F8FAFC] transition-all hover:border-[#60A5FA66] hover:bg-[#1E293B]"
+          className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 dark:bg-black/80 px-5 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-amber-500/50 hover:bg-slate-800"
         >
           &larr; Back to intake
         </button>
-
         <button
           type="button"
           onClick={() => setCurrentStep(4)}
-          className="flex items-center gap-2 rounded-xl bg-[#0EA5E9] px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_20px_rgba(14,165,233,0.4)] transition-all hover:bg-[#38BDF8] hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]"
+          className="flex items-center gap-2 rounded-xl bg-amber-500 px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all hover:bg-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.5)]"
         >
           Generate Final Portfolio Code 
         </button>
