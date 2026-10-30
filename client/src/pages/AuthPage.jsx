@@ -16,14 +16,15 @@ export default function AuthPage({ onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate && onNavigate('forgot-password')}
-            className="text-venom-secondary hover:text-venom-gold transition-colors"
+            className="text-venom-secondary hover:text-venom-gold transition-colors cursor-pointer"
           >
             Forgot password?
           </button>
+          
           <button
             type="button"
-            onClick={() => onNavigate && onNavigate('signup')}
-            className="font-semibold text-venom-gold hover:text-venom-gold-hover transition-colors"
+            onClick={() => onNavigate && onNavigate('create-account')}
+            className="font-semibold text-venom-gold hover:text-venom-gold-hover transition-colors cursor-pointer"
           >
             Create an account &rarr;
           </button>
