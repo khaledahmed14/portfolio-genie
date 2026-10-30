@@ -11,7 +11,7 @@ export default function SignUpPage() {
         <img
           src={logo}
           alt="VenomAi Big Logo"
-          className="relative w-32 h-32 sm:w-40 sm:h-40 object-contain"
+          className="relative w-50 h-30  object-contain"
         />
       </div>
 

@@ -4,11 +4,15 @@ import logo from "../assets/logo.png";
 export default function AuthHero() {
   return (
     <div className="flex flex-col items-center text-center mt-6 transition-colors duration-300">
-      <img
-        src={logo}
-        alt="PortfolioGenie logo"
-        className="w-50 h-30 flex items-center justify-center object-contain"
-      />
+      
+      <div className="relative mb-2 flex justify-center items-center">
+        <div className="absolute inset-0 rounded-full blur-2xl opacity-0 dark:opacity-40 bg-amber-500/30 transition-opacity duration-300"></div>
+        <img
+          src={logo}
+          alt="PortfolioGenie logo"
+          className="relative w-50 h-30 flex items-center justify-center object-contain"
+        />
+      </div>
 
       <h1 className="text-4xl font-['Trebuchet_MS'] text-slate-900 dark:text-white tracking-tight mb-3">
         Venom<span className="text-amber-400">Ai</span>

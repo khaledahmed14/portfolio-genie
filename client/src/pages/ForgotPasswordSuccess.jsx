@@ -5,11 +5,17 @@ export default function ForgotPasswordSuccess({ setCurrentStep }) {
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-6 transition-colors duration-300">
       <div className="flex flex-col items-center justify-center text-center my-6">
-        <img
-          src={logo}
-          alt="PortfolioGenie logo"
-          className="w-50 h-30 flex items-center justify-center object-contain"
-        />
+        
+        {/* اللوجو بحجمه الأصلي تماماً مع إضافة التوهج الخلفي فقط في الوضع الداكن */}
+        <div className="relative mb-2 flex justify-center items-center">
+          <div className="absolute inset-0 rounded-full blur-2xl opacity-0 dark:opacity-40 bg-amber-500/30 transition-opacity duration-300"></div>
+          <img
+            src={logo}
+            alt="PortfolioGenie logo"
+            className="relative w-50 h-30 flex items-center justify-center object-contain"
+          />
+        </div>
+
         <h1 className="text-3xl font-bold tracking-tight text-venom-text mb-2">
           Reset your password
         </h1>
