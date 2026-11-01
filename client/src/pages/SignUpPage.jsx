@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
-
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 export default function SignUpPage() {
   return (
     <div className="w-full flex flex-col items-center justify-center pt-2 pb-12">
@@ -33,8 +32,8 @@ export default function SignUpPage() {
                  <div className="flex flex-col gap-2">
                    <label htmlFor="name-input" className="text-slate-200 font-semibold text-[13px]">Full Name</label>
                    <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
-                     <span><FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-amber-500/70" /></span>
-                     <input type="email" name="Email" id="email-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Ada Lovelace" />
+                     <span><FontAwesomeIcon icon={faUser} className="w-4 h-4 text-amber-500/70" /></span>
+                     <input type="text" name="name" id="name-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Ada Lovelace" />
                    </div>
                  </div>
                  <div className="flex flex-col gap-2">
@@ -55,7 +54,7 @@ export default function SignUpPage() {
                    <label htmlFor="confpassword-input" className="text-slate-200 font-semibold text-[13px]">Confirm Password</label>
                    <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
                      <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
-                     <input type="password" name="password" id="password-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Re-enter your password" />
+                     <input type="password" name="confirm_password" id="confpassword-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Re-enter your password" />
                    </div>
                  </div>
                   <button
@@ -85,7 +84,7 @@ export default function SignUpPage() {
             <div className="flex justify-center mt-4">
                  <span className="whitespace-nowrap text-[14px] text-center font-medium text-slate-500">Aready have an account ?  <button
                   type="button"
-                  onClick={() => onNavigate && onNavigate('')}
+                  onClick={() => onNavigate && onNavigate('setAuthView')}
                   className="font-semibold text-venom-gold hover:text-venom-gold-hover transition-colors cursor-pointer"
                 >
                   Sign in
