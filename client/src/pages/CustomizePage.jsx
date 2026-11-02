@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import LiveStructure from "../components/LiveStructure";
 import Arrangesettings from "../components/ArrangePortfolioSettings";
 
-export default function CustomizePage({ setCurrentStep }) {
+export default function CustomizePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex w-full flex-col gap-6 py-4 transition-colors duration-300">
       <div className="flex flex-col gap-1 text-left">
@@ -27,15 +30,15 @@ export default function CustomizePage({ setCurrentStep }) {
       <div className="mt-4 flex w-full items-center justify-between border-t border-venom-border pt-6">
         <button
           type="button"
-          onClick={() => setCurrentStep(2)}
-          className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-card/80 px-5 py-2.5 text-sm font-medium text-venom-text transition-all hover:border-venom-gold/50 hover:bg-venom-card-hover"
+          onClick={() => navigate("/intake")}
+          className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-card/80 px-5 py-2.5 text-sm font-medium text-venom-text transition-all hover:border-venom-gold/50 hover:bg-venom-card-hover cursor-pointer"
         >
           &larr; Back to intake
         </button>
         <button
           type="button"
-          onClick={() => setCurrentStep(4)}
-          className="flex items-center gap-2 rounded-xl bg-venom-gold px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-gold-glow transition-all hover:bg-venom-gold-hover hover:shadow-[0_0_25px_var(--gold-glow)]"
+          onClick={() => navigate("/preview")}
+          className="flex items-center gap-2 rounded-xl bg-venom-gold px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-gold-glow transition-all hover:bg-venom-gold-hover hover:shadow-[0_0_25px_var(--gold-glow)] cursor-pointer"
         >
           Generate Final Portfolio Code 
         </button>

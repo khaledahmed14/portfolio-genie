@@ -39,8 +39,6 @@ export default function AdditionalInfoCard() {
 
   return (
     <div className="w-full max-w-[1130px] mx-auto bg-venom-card border border-venom-border backdrop-blur-md p-4 sm:p-6 rounded-2xl flex flex-col gap-4 text-venom-text transition-colors duration-300 shadow-xl">
-      
-      {/* رأس الكارت */}
       <div className="flex items-center gap-3">
         <span className="shrink-0 w-[30px] h-[30px] text-venom-gold font-medium text-[13px] bg-venom-gold/15 border border-venom-gold/30 rounded-lg flex justify-center items-center">
           B
@@ -54,8 +52,6 @@ export default function AdditionalInfoCard() {
           </h3>
         </div>
       </div>
-
-      {/* حقول الاسم والمسمى الوظيفي */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2 min-w-0">
           <label htmlFor="name-input" className="text-venom-secondary text-left self-start font-semibold text-[13px]">
@@ -86,8 +82,6 @@ export default function AdditionalInfoCard() {
           </div>
         </div>
       </div>
-
-      {/* حقل النبذة التعريفية (Bio) */}
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center gap-2">
           <label htmlFor="bio-input" className="text-venom-secondary font-semibold text-[13px]">
@@ -107,8 +101,6 @@ export default function AdditionalInfoCard() {
           className="w-full min-h-[130px] resize-y bg-venom-input border border-venom-border rounded-2xl outline-none px-4 py-3 text-[15px] text-venom-text placeholder:text-venom-muted transition-all duration-300 focus:border-venom-gold focus:shadow-[0_0_15px_var(--gold-glow)] hover:shadow-[0_0_15px_var(--gold-glow)]"
         ></textarea>
       </div>
-
-      {/* قسم المهارات والأدوات */}
       <div className="flex flex-col gap-3 font-['JetBrains_Mono']">
         <h3 className="text-[13px] font-semibold text-venom-text font-['Plus_Jakarta_Sans']">
           Skills & tools (press Enter or comma to add)
@@ -184,8 +176,6 @@ export default function AdditionalInfoCard() {
             ))}
         </div>
       </div>
-
-      {/* قسم روابط التواصل الاجتماعي */}
       <div className="flex flex-col gap-3 font-['Plus_Jakarta_Sans']">
         <h3 className="text-[13px] font-semibold text-venom-text">
           Contact & Social Links

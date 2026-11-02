@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AuthHero from "../components/AuthHero";
 import GitHubBtn from "../components/GitHubBtn";
 import EmailForm from "../components/EmailForm";
 
-export default function AuthPage({ onNavigate }) {
+export default function AuthPage() {
   return (
     <div className="flex w-full max-w-2xl flex-1 flex-col items-center justify-between text-center transition-colors duration-300">
       <div className="flex flex-col items-center justify-center w-full">
@@ -13,21 +14,19 @@ export default function AuthPage({ onNavigate }) {
           <EmailForm />
         </div>
         <div className="mt-6 flex w-full items-center justify-around text-sm px-2">
-          <button
-            type="button"
-            onClick={() => onNavigate && onNavigate('forgot-password')}
+          <Link
+            to="/forgot-password"
             className="text-venom-secondary hover:text-venom-gold transition-colors cursor-pointer"
           >
             Forgot password?
-          </button>
+          </Link>
           
-          <button
-            type="button"
-            onClick={() => onNavigate && onNavigate('create-account')}
+          <Link
+            to="/signup"
             className="font-semibold text-venom-gold hover:text-venom-gold-hover transition-colors cursor-pointer"
           >
             Create an account &rarr;
-          </button>
+          </Link>
         </div>
       </div>
 
