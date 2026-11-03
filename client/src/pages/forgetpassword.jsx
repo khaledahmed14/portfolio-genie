@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -10,38 +11,53 @@ export default function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email.trim()) return;
-    navigate("/forgot-password-success");
+
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) return;
+
+    navigate("/forgot-password-success", {
+      state: { email: trimmedEmail },
+    });
   };
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-6 transition-colors duration-300">
-      <div className="flex flex-col items-center justify-center text-center my-6">
-        <div className="relative mb-2 flex justify-center items-center">
-          <div className="absolute inset-0 rounded-full blur-2xl opacity-0 dark:opacity-40 bg-amber-500/30 transition-opacity duration-300"></div>
+      <div className="my-6 flex flex-col items-center justify-center text-center">
+        <div className="relative mb-2 flex items-center justify-center">
+          <div className="absolute inset-0 rounded-full bg-amber-500/30 opacity-0 blur-2xl transition-opacity duration-300 dark:opacity-40" />
           <img
             src={logo}
             alt="PortfolioGenie logo"
-            className="relative w-50 h-30 flex items-center justify-center object-contain"
+            className="relative h-30 w-50 object-contain"
           />
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight text-venom-text mb-2">
+        <h1 className="mb-2 text-3xl font-bold tracking-tight text-venom-text">
           Reset your password
         </h1>
-        <p className="text-sm text-venom-secondary max-w-md">
+
+        <p className="max-w-md text-sm text-venom-secondary">
           Enter your account email and we'll send you recovery instructions.
         </p>
       </div>
 
-      <div className="mx-auto w-full max-w-lg rounded-2xl border border-venom-border bg-venom-card/90 backdrop-blur-md p-6 shadow-xl">
+      <div className="mx-auto w-full max-w-lg rounded-2xl border border-venom-border bg-venom-card/90 p-6 shadow-xl backdrop-blur-md">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2 text-left">
-            <label htmlFor="recovery-email" className="text-slate-200 font-semibold text-[13px]">
+            <label
+              htmlFor="recovery-email"
+              className="text-[13px] font-semibold text-venom-text"
+            >
               Email address
             </label>
-            <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-4 py-3 focus-within:border-venom-gold transition-colors">
-              <FontAwesomeIcon icon={faEnvelope} className="text-venom-gold text-sm" />
+
+            <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-4 py-3 transition-colors focus-within:border-venom-gold">
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="text-sm text-venom-gold"
+              />
+
               <input
                 id="recovery-email"
                 type="email"
