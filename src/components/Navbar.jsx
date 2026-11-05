@@ -1,8 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { useTheme } from "../context/ThemeContext";
-
+import { useTheme } from "../Context/ThemeContext";
 const STEPS = [
   { id: 1, subLabel: "STEP 1", label: "Auth", path: "/auth" },
   { id: 2, subLabel: "STEP 2", label: "Intake", path: "/intake" },
