@@ -26,7 +26,7 @@ export default function CustomizePage() {
           <LiveStructure />
         </div>
       </div>
-      
+
       <div className="mt-4 flex w-full items-center justify-between border-t border-venom-border pt-6">
         <button
           type="button"
@@ -40,7 +40,7 @@ export default function CustomizePage() {
           onClick={() => navigate("/preview")}
           className="flex items-center gap-2 rounded-xl bg-venom-gold px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-gold-glow transition-all hover:bg-venom-gold-hover hover:shadow-[0_0_25px_var(--gold-glow)] cursor-pointer"
         >
-          Generate Final Portfolio Code 
+          Generate Final Portfolio Code
         </button>
       </div>
     </div>

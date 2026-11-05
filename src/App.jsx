@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
-import ProtectedRoute from "./components/ProtectedRoute"; 
+import ProtectedRoute from "./components/ProtectedRoute";
 import AuthPage from "./pages/AuthPage";
 import ForgotPassword from "./pages/forgetpassword";
 import ForgotPasswordSuccess from "./pages/ForgotPasswordSuccess";
@@ -10,6 +10,7 @@ import IntakePage from "./pages/IntakePage";
 import CustomizePage from "./pages/CustomizePage";
 import PreviewPage from "./pages/PreviewPage";
 import { ThemeProvider } from "./Context/ThemeContext";
+import { PortfolioConfigProvider } from "./Context/PortfolioConfigContext";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +65,9 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <PortfolioConfigProvider>
+        <RouterProvider router={router} />
+      </PortfolioConfigProvider>
     </ThemeProvider>
   );
 }
