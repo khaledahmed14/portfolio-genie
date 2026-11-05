@@ -9,7 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 import IntakePage from "./pages/IntakePage";
 import CustomizePage from "./pages/CustomizePage";
 import PreviewPage from "./pages/PreviewPage";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "./Context/ThemeContext";
 
 const router = createBrowserRouter([
   {
