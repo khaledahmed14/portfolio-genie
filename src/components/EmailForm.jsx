@@ -9,6 +9,7 @@ export default function EmailForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem("token", "demo-token-123");
     navigate("/intake");
   };
 
