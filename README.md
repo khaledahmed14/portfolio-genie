@@ -1,44 +1,16 @@
-# Venom AI 
-> Transform Your GitHub into a High-Impact Developer Portfolio in Seconds.
+# React + Vite
 
-##  Project Overview
-**Venom AI** is an intelligent, automated web platform tailored for developers, computer science students, and freelancers. The application connects directly with user profiles and repositories to analyze code activity, skills, and projects, instantly generating a professional, responsive, and recruiter-ready developer portfolio.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-Designed with a futuristic sapphire/cyan aesthetic and sleek dark-mode styling, Venom AI bridges the gap between raw code repositories and stunning visual presentations.
+Currently, two official plugins are available:
 
----
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-##  Core Features
-* **Automated GitHub Ingestion:** Seamlessly links and fetches repository statistics, languages, and project descriptions.
-* **AI-Powered Customization:** Generates optimized summaries, SEO copy, and professional layouts tailored to each developer.
-* **Futuristic UI/UX:** Built with React, Vite, and Tailwind CSS featuring high-contrast sapphire/cyan glowing accents and crystal-inspired branding.
-* **1-Click Deployment:** Allows developers to deploy and share their generated portfolios instantly.
-* **Interactive Multi-Step Wizard:** Guides users smoothly from authentication and intake to customization and preview.
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-##  Team X (Contributors)
-* **Khaled Ahmed** - Team Leader & Frontend Developer (`khaledahmed14`)
-* **Amr Elsayed** - UI/UX & Frontend Contributor (`amre3639-ux`)
-* **Lujain Kamel** - Developer & Collaborator (`guthip387`)
-* **Heba Khedr** - Developer & Frontend Contributor (`HebaKhedr`)
-* **Mayar Farid** - Documentation & QA Contributor (`Mayar-Farid`)
+## Expanding the Oxlint configuration
 
----
-
-##  Technology Stack
-* **Frontend Library:** React (Vite build tool)
-* **Styling & Design:** Tailwind CSS (Custom sapphire/cyan theme)
-* **Language:** JavaScript (ES6+)
-* **Version Control:** Git & GitHub
-
----
-
-##  Getting Started & Local Installation
-
-To run this project locally on your machine, follow these steps:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/khaledahmed14/portfolio-genie.git](https://github.com/khaledahmed14/portfolio-genie.git)
-   cd portfolio-genie/client
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
