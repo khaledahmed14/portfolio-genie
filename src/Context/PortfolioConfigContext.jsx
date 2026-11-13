@@ -49,7 +49,6 @@ export function PortfolioConfigProvider({ children }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
     } catch {
-      /* ignore */
     }
   }, [config]);
 

@@ -128,14 +128,11 @@ export default function Arrangesettings() {
       window.removeEventListener("pointercancel", handleUp);
     };
   }, [dragId]);
-
-  /* ---------- Slider ---------- */
   const ratio = (count - MIN_PROJECTS) / (MAX_PROJECTS - MIN_PROJECTS);
   const fill = `calc(${ratio} * (100% - 18px) + 9px)`; 
 
   return (
     <div className="flex h-full w-full flex-col gap-7 rounded-2xl bg-venom-card/40 border border-venom-border px-4 py-6 font-sans text-venom-muted transition-colors duration-300 shadow-xl">
-      {/* ---------------- Sections ---------------- */}
       <section className="flex flex-col gap-3">
         <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-venom-muted">
           Sections{" "}
@@ -218,8 +215,6 @@ export default function Arrangesettings() {
           })}
         </ul>
       </section>
-
-      {/* ---------------- Featured Projects ---------------- */}
       <section className="flex flex-col gap-3">
         <h3 className="font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-venom-muted">
           Featured Projects
@@ -281,8 +276,6 @@ export default function Arrangesettings() {
           Showing {count} of {MAX_PROJECTS} repositories, ranked by stars.
         </p>
       </section>
-
-      {/* ---------------- Content Toggles ---------------- */}
       <section className="flex flex-col gap-3">
         <h3 className="font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-venom-muted">
           Content Toggles

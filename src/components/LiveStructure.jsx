@@ -51,8 +51,6 @@ function SectionHeader({ number, title, meta }) {
   );
 }
 
-/* ====================== الأقسام ====================== */
-
 function HeroSection({ number }) {
   return (
     <section className={sectionClass}>
@@ -274,8 +272,6 @@ function ContactSection({ number, toggles }) {
     </section>
   );
 }
-
-/* id القسم → الكومبوننت بتاعه */
 const SECTION_COMPONENTS = {
   1: HeroSection,
   2: AboutSection,
@@ -285,10 +281,8 @@ const SECTION_COMPONENTS = {
   6: ContactSection,
 };
 
-/* ====================== الكومبوننت الرئيسي ====================== */
-
 export default function LiveStructure() {
-  const { config } = usePortfolioConfig(); // ← بيقرأ من الخزنة
+  const { config } = usePortfolioConfig();
   const { sections, projectCount, toggles } = config;
   const visible = sections.filter((s) => s.enabled);
 
