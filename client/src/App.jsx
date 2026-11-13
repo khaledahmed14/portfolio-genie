@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import AuthPage from "./pages/AuthPage";
+import SignUpPage from "./pages/SignUpPage"; 
 import IntakePage from "./pages/IntakePage";
 import CustomizePage from "./pages/CustomizePage";
 import PreviewPage from "./pages/PreviewPage";
 
 export default function App() {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [authView, setAuthView] = useState("auth"); 
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip bg-[#030712] font-sans text-white selection:bg-blue-500 selection:text-white">
@@ -26,7 +28,13 @@ export default function App() {
         <Navbar currentStep={currentStep} setCurrentStep={setCurrentStep} />
       </div>
       <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-4 py-8">
-        {currentStep === 1 && <AuthPage />}
+        {currentStep === 1 && (
+          authView === "auth" ? (
+            <AuthPage onNavigate={(view) => setAuthView(view)} />
+          ) : (
+            <SignUpPage onNavigate={(view) => setAuthView(view)} />
+          )
+        )}
         {currentStep === 2 && <IntakePage setCurrentStep={setCurrentStep} />}
         {currentStep === 3 && <CustomizePage setCurrentStep={setCurrentStep} />}
         {currentStep === 4 && <PreviewPage setCurrentStep={setCurrentStep} />}

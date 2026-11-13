@@ -3,13 +3,26 @@ import AuthHero from "../components/AuthHero";
 import GitHubBtn from "../components/GitHubBtn";
 import EmailForm from "../components/EmailForm";
 
-export default function AuthPage() {
+export default function AuthPage({ onNavigate }) {
   return (
     <div className="flex w-full max-w-2xl flex-1 flex-col items-center justify-between text-center">
       <div className="flex flex-col items-center justify-center w-full">
         <AuthHero /> 
         <GitHubBtn />
-        <div className="mt-6 text-start w-full"><EmailForm /></div>
+        <div className="mt-6 text-start w-full">
+          <EmailForm />
+        </div>
+
+        <div className="mt-4 text-center text-sm text-[#98a7c7]">
+          Don't have an account?{" "}
+          <button
+            type="button"
+            onClick={() => onNavigate && onNavigate('create-account')}
+            className="text-[#60A5FA] font-semibold hover:underline cursor-pointer"
+          >
+            Create an account
+          </button>
+        </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-4 pt-12 text-center w-full">
         <div className="flex items-center gap-2 rounded-full border border-gray-800/80 bg-[#0b0f19]/80 px-4 py-1.5 text-xs text-gray-400 shadow-lg backdrop-blur-md">

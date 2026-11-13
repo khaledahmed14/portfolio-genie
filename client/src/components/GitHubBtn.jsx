@@ -2,6 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function GitHubBtn() {
+const handleGitHubSignIn = () => {
+    console.log("GitHub Sign-In triggered");
+};
+
 return (
     <div className="flex w-full max-w-[470px] flex-col gap-4">
     <div className="flex w-full flex-wrap items-center justify-center gap-2">
@@ -20,7 +24,8 @@ return (
 
     <button
         type="button"
-        className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-white bg-slate-50 px-6 text-[15px] font-bold leading-[155%] text-[#0B1220] shadow-[0_0_0_rgba(6,182,212,0)] transition-all duration-300 [font-family:'Plus_Jakarta_Sans',sans-serif] hover:-translate-y-1 hover:border-cyan-400 hover:bg-white hover:shadow-[0_0_28px_rgba(6,182,212,0.55)] active:translate-y-0 active:scale-[0.98]"
+        onClick={handleGitHubSignIn}
+        className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-white bg-slate-50 px-6 text-[15px] font-bold leading-[155%] text-[#0B1220] shadow-[0_0_0_rgba(6,182,212,0)] transition-all duration-300 [font-family:'Plus_Jakarta_Sans',sans-serif] hover:-translate-y-1 hover:border-cyan-400 hover:bg-white hover:shadow-[0_0_28px_rgba(6,182,212,0.55)] active:translate-y-0 active:scale-[0.98] cursor-pointer"
     >
         <FontAwesomeIcon
         icon={faGithub}
