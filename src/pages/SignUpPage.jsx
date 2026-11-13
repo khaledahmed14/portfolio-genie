@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,9 +8,37 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form submitted with data:", formData); // للتأكد من عمل الدالة في الـ Console
+
+    // فحص التطابق بين كلمة المرور وتأكيدها
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // التأكد من أن الحقول غير فارغة
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    // الانتقال للخطوة التالية بنجاح
     navigate("/intake");
   };
 
@@ -45,41 +73,83 @@ export default function SignUpPage() {
             <label htmlFor="name-input" className="text-slate-200 font-semibold text-[13px]">Full Name</label>
             <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
               <span><FontAwesomeIcon icon={faUser} className="w-4 h-4 text-amber-500/70" /></span>
-              <input type="text" name="name" id="name-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Ada Lovelace" required />
+              <input 
+                type="text" 
+                name="name" 
+                id="name-input" 
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+                placeholder="Ada Lovelace" 
+                required 
+              />
             </div>
           </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="email-input" className="text-slate-200 font-semibold text-[13px]">Email</label>
             <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
               <span><FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-amber-500/70" /></span>
-              <input type="email" name="Email" id="email-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="you@company.dev" required />
+              <input 
+                type="email" 
+                name="email" 
+                id="email-input" 
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+                placeholder="you@company.dev" 
+                required 
+              />
             </div>
           </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="password-input" className="text-slate-200 font-semibold text-[13px]">Password</label>
             <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
               <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
-              <input type="password" name="password" id="password-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="At least 6 characters" required />
+              <input 
+                type="password" 
+                name="password" 
+                id="password-input" 
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+                placeholder="At least 6 characters" 
+                required 
+              />
             </div>
           </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="confpassword-input" className="text-slate-200 font-semibold text-[13px]">Confirm Password</label>
             <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
               <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
-              <input type="password" name="confirm_password" id="confpassword-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="Re-enter your password" required />
+              <input 
+                type="password" 
+                name="confirmPassword" 
+                id="confpassword-input" 
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+                placeholder="Re-enter your password" 
+                required 
+              />
             </div>
           </div>
+
           <button
             type="submit"
             className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-amber-500 bg-amber-500 px-6 text-[15px] font-bold leading-[155%] text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] active:translate-y-0 active:scale-[0.98]"
           >
             <span>Create Account</span>
           </button>
+
           <div className="flex w-full items-center gap-3">
             <div className="h-px flex-1 bg-slate-800" />
             <span className="whitespace-nowrap text-[9px] font-medium text-slate-500">OR</span>
             <div className="h-px flex-1 bg-slate-800" />
           </div>
+
           <button
             type="button"
             className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-amber-500/50 bg-slate-50 dark:bg-slate-900 px-6 text-[15px] font-bold leading-[155%] text-slate-950 dark:text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-400 hover:bg-amber-500 hover:text-slate-950 hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] active:translate-y-0 active:scale-[0.98]"
@@ -91,6 +161,7 @@ export default function SignUpPage() {
             <span>Sign in with GitHub</span>
           </button>
         </form>
+
         <div className="flex justify-center mt-4">
           <span className="whitespace-nowrap text-[14px] text-center font-medium text-slate-500">
             Already have an account?{" "}
@@ -103,7 +174,6 @@ export default function SignUpPage() {
           </span>
         </div>
       </div>
-
     </div>
   );
 }

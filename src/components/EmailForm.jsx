@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -6,13 +6,18 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 export default function EmailForm() {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (rememberMe) {
+      localStorage.setItem("userEmail", email);
+    }
     localStorage.setItem("token", "demo-token-123");
     navigate("/intake");
   };
-
+  
   return (
     <form 
       onSubmit={handleSubmit}
@@ -22,19 +27,44 @@ export default function EmailForm() {
         <label htmlFor="email-input" className="text-slate-200 font-semibold text-[13px]">Email</label>
         <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
           <span><FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-amber-500/70" /></span>
-          <input type="email" name="Email" id="email-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="you@company.dev" required />
+          <input 
+            type="email" 
+            name="Email" 
+            id="email-input" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+            placeholder="you@company.dev" 
+            required 
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password-input" className="text-slate-200 font-semibold text-[13px]">Password</label>
         <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
           <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
-          <input type="password" name="password" id="password-input" className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" placeholder="At least 6 characters" required />
+          <input 
+            type="password" 
+            name="password" 
+            id="password-input" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full bg-transparent outline-none font-normal text-[15px] text-slate-100 placeholder:text-slate-500" 
+            placeholder="At least 6 characters" 
+            required 
+          />
         </div>
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <input type="checkbox" className="w-3 h-3 rounded-full accent-amber-500 cursor-pointer" name="remember-me" id="check-input" />
+          <input 
+            type="checkbox" 
+            className="w-3 h-3 rounded-full accent-amber-500 cursor-pointer" 
+            name="remember-me" 
+            id="check-input" 
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
           <label htmlFor="check-input" className="text-slate-300 font-semibold text-[13px] cursor-pointer">Remember me</label>
         </div>
         <span className="text-slate-400 font-normal text-[12px]">Demo mode: any valid email works</span>
