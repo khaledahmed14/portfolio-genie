@@ -11,6 +11,7 @@ import CustomizePage from "./pages/CustomizePage";
 import PreviewPage from "./pages/PreviewPage";
 import { ThemeProvider } from "./Context/ThemeContext";
 import { PortfolioConfigProvider } from "./Context/PortfolioConfigContext";
+import { IntakeProvider } from "./Context/intakecontext";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +67,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <PortfolioConfigProvider>
-        <RouterProvider router={router} />
+        <IntakeProvider>
+          <RouterProvider router={router} />
+        </IntakeProvider>
       </PortfolioConfigProvider>
     </ThemeProvider>
   );

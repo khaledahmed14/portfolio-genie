@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useIntake } from "../Context/intakecontext";
 
 const repositories = [
   { name: "portfolio-genie", language: "JavaScript", stars: 1280 },
@@ -13,16 +14,27 @@ const stats = [
   { label: "Followers", value: "2.4k" },
   { label: "Total stars", value: "2.7k" },
 ];
+const GITHUB_URL_REGEX =
+  /^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(\/[\w.-]+)?\/?$/i;
 
 export default function GithubFetcherCard() {
-  const [profileUrl, setProfileUrl] = useState("");
+  const { intake, updateField } = useIntake();
+  const profileUrl = intake.profileUrl;
   const [loading, setLoading] = useState(false);
+  const timerRef = useRef(null);
+
+  const trimmedUrl = profileUrl.trim();
+  const isValidUrl = GITHUB_URL_REGEX.test(trimmedUrl);
+  const showError = trimmedUrl !== "" && !isValidUrl;
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!profileUrl.trim()) return;
+    if (loading || !isValidUrl) return;
     setLoading(true);
-    setTimeout(() => setLoading(false), 600);
+
+    timerRef.current = setTimeout(() => setLoading(false), 1500);
   }
 
   return (
@@ -38,22 +50,32 @@ export default function GithubFetcherCard() {
 
       <form
         onSubmit={handleSubmit}
+        noValidate
         className="mb-7 flex flex-col gap-3 sm:flex-row"
       >
         <label htmlFor="github-profile-url" className="sr-only">
           GitHub profile or repository URL
         </label>
-        <input
-          id="github-profile-url"
-          type="url"
-          value={profileUrl}
-          onChange={(event) => setProfileUrl(event.target.value)}
-          placeholder="https://github.com/alex-dev"
-          className="min-w-0 flex-1 rounded-xl border border-venom-border bg-venom-input px-4 py-3 text-sm text-venom-text outline-none transition placeholder:text-venom-muted focus:border-venom-gold focus:ring-2 focus:ring-venom-gold/20"
-        />
+        <div className="min-w-0 flex-1">
+          <input
+            id="github-profile-url"
+            type="url"
+            value={profileUrl}
+            onChange={(event) => updateField("profileUrl", event.target.value)}
+            placeholder="https://github.com/alex-dev"
+            aria-invalid={showError}
+            aria-describedby={showError ? "github-url-error" : undefined}
+            className="w-full min-w-0 rounded-xl border border-venom-border bg-venom-input px-4 py-3 text-sm text-venom-text outline-none transition placeholder:text-venom-muted focus:border-venom-gold focus:ring-2 focus:ring-venom-gold/20"
+          />
+          {showError && (
+            <p id="github-url-error" className="mt-2 text-left text-xs text-red-400">
+              Enter a valid GitHub URL, e.g. https://github.com/username
+            </p>
+          )}
+        </div>
         <button
           type="submit"
-          disabled={loading || !profileUrl.trim()}
+          disabled={loading || !isValidUrl}
           className="flex items-center justify-center gap-2 rounded-xl bg-venom-gold px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-500/35 transition-all hover:bg-venom-gold-hover hover:shadow-[0_0_25px_var(--gold-glow)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Refreshing..." : "Re-fetch Data"}

@@ -3,18 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLinkedinIn, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { useIntake } from "../Context/intakecontext";
 
 export default function AdditionalInfoCard() {
-  const [bio, setBio] = useState("");
-  const [skills, setSkills] = useState([
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Docker",
-    "Tailwind CSS",
-    "MongoDB",
-  ]);
+  const { intake, updateField, setSkills } = useIntake();
+  const { bio, skills } = intake;
+
+
   const [newSkill, setNewSkill] = useState("");
+
   const suggestedSkills = [
     "GraphQL",
     "Next.js",
@@ -25,16 +22,23 @@ export default function AdditionalInfoCard() {
     "Python",
   ];
 
+
+  const handleField = (e) => updateField(e.target.name, e.target.value);
+
   const addSkill = (skill) => {
     const trimmedSkill = skill.trim();
-    if (trimmedSkill && !skills.some((s) => s.toLowerCase() === trimmedSkill.toLowerCase())) {
-      setSkills([...skills, trimmedSkill]);
+    if (trimmedSkill) {
+      setSkills((prev) =>
+        prev.some((s) => s.toLowerCase() === trimmedSkill.toLowerCase())
+          ? prev
+          : [...prev, trimmedSkill]
+      );
     }
     setNewSkill("");
   };
 
   const removeSkill = (skillToRemove) => {
-    setSkills(skills.filter((skill) => skill !== skillToRemove));
+    setSkills((prev) => prev.filter((skill) => skill !== skillToRemove));
   };
 
   return (
@@ -61,6 +65,9 @@ export default function AdditionalInfoCard() {
             <input 
               type="text" 
               name="name" 
+              value={intake.name}
+              onChange={handleField}
+              
               id="name-input" 
               className="w-full min-w-0 bg-transparent outline-none font-normal text-[15px] text-venom-text placeholder:text-venom-muted" 
               placeholder="Enter your name" 
@@ -75,6 +82,9 @@ export default function AdditionalInfoCard() {
             <input 
               type="text" 
               name="title" 
+              value={intake.title}
+              onChange={handleField}
+              
               id="title-input" 
               className="w-full min-w-0 bg-transparent outline-none font-normal text-[15px] text-venom-text placeholder:text-venom-muted" 
               placeholder="Full-Stack React & Node.js Engineer" 
@@ -95,7 +105,7 @@ export default function AdditionalInfoCard() {
           name="bio"
           id="bio-input" 
           value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          onChange={handleField}
           maxLength={400} 
           placeholder=" Write a brief bio about yourself, your skills, and your experience. This will be used to generate your portfolio content."
           className="w-full min-h-[130px] resize-y bg-venom-input border border-venom-border rounded-2xl outline-none px-4 py-3 text-[15px] text-venom-text placeholder:text-venom-muted transition-all duration-300 focus:border-venom-gold focus:shadow-[0_0_15px_var(--gold-glow)] hover:shadow-[0_0_15px_var(--gold-glow)]"
@@ -188,7 +198,7 @@ export default function AdditionalInfoCard() {
             </label>
             <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-3 py-2.5 focus-within:border-venom-gold">
               <FontAwesomeIcon icon={faEnvelope} className="text-venom-gold text-xs" />
-              <input id="email-input" type="email" placeholder="alex@alexchen.dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
+              <input id="email-input" name="email" value={intake.email} onChange={handleField} type="email" placeholder="alex@alexchen.dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
             </div>
           </div>
 
@@ -198,7 +208,7 @@ export default function AdditionalInfoCard() {
             </label>
             <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-3 py-2.5 focus-within:border-venom-gold">
               <FontAwesomeIcon icon={faLinkedinIn} className="text-venom-gold text-xs" />
-              <input id="linkedin-input" type="url" placeholder="https://linkedin.com/in/your-profile" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
+              <input id="linkedin-input" name="linkedin" value={intake.linkedin} onChange={handleField} type="url" placeholder="https://linkedin.com/in/your-profile" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
             </div>
           </div>
 
@@ -208,7 +218,7 @@ export default function AdditionalInfoCard() {
             </label>
             <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-3 py-2.5 focus-within:border-venom-gold">
               <FontAwesomeIcon icon={faXTwitter} className="text-venom-gold text-xs" />
-              <input id="twitter-input" type="text" placeholder="@alexchen_dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
+              <input id="twitter-input" name="twitter" value={intake.twitter} onChange={handleField} type="text" placeholder="@alexchen_dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
             </div>
           </div>
 
@@ -218,7 +228,7 @@ export default function AdditionalInfoCard() {
             </label>
             <div className="flex items-center gap-2 rounded-xl border border-venom-border bg-venom-input px-3 py-2.5 focus-within:border-venom-gold">
               <FontAwesomeIcon icon={faGlobe} className="text-venom-gold text-xs" />
-              <input id="website-input" type="url" placeholder="https://alexchen.dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
+              <input id="website-input" name="website" value={intake.website} onChange={handleField} type="url" placeholder="https://alexchen.dev" className="w-full min-w-0 bg-transparent text-xs text-venom-text outline-none placeholder:text-venom-muted" />
             </div>
           </div>
         </div>
