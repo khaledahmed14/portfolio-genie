@@ -1,0 +1,37 @@
+import { useNavigate } from "react-router-dom";
+import Navbar2 from "../components/NavIntakePage";
+import Infocard from "../components/AdditionalInfoCard";
+import GithubFetcherCard from "../components/GithubFetcherCard";
+
+export default function IntakePage() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-6 transition-colors duration-300">
+      <Navbar2 />
+
+      <div>
+        <GithubFetcherCard />
+      </div>
+
+      <div>
+        <Infocard />
+      </div>
+
+      <div className="mt-4 flex flex-col items-center justify-between gap-4 border-t border-venom-border pt-6 sm:flex-row">
+        <p className="text-xs text-venom-muted">
+          Section C &middot; Next, you choose which sections appear and in what order.
+        </p>
+
+        <button
+          type="button"
+          onClick={() => navigate("/customize")}
+          className="flex items-center justify-center gap-2 rounded-xl bg-venom-gold px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-500/30 transition-all hover:bg-venom-gold-hover hover:shadow-[0_0_25px_var(--gold-glow)] active:scale-95"
+        >
+          <span>Proceed to Portfolio Customization</span>
+          <span className="text-3xl leading-none">&rarr;</span>
+        </button>
+      </div>
+    </div>
+  );
+}
