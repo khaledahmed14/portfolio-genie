@@ -15,3 +15,8 @@ export function setToken(token: string): void {
     /* storage unavailable */
   }
 }
+export function removeToken(): void {
+  try {
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+  } catch {}
+}

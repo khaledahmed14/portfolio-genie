@@ -13,7 +13,6 @@ import { PortfolioConfigProvider } from "./context/PortfolioConfigContext";
 import { IntakeProvider } from "./context/IntakeContext";
 
 export default function App() {
-  // نقل الـ createBrowserRouter إلى داخل المكون هنا يحل مشكلة الـ Hook Call تماماً
   const router = createBrowserRouter([
     {
       path: "/",
