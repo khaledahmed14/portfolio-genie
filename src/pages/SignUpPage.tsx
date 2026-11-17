@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { setToken } from "../utils/storage";
+import { signUp } from "../services/authService";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -15,9 +15,12 @@ export default function SignUpPage() {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleSubmit = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
+    setError("");
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
       return;
@@ -27,8 +30,15 @@ export default function SignUpPage() {
       setError("Password must be at least 6 characters.");
       return;
     }
-    setToken("demo-token-123");
-    navigate("/intake");
+    setLoading(true);
+    try {
+      await signUp(name, email, password);
+      navigate("/intake");
+    } catch {
+      setError("Sign up failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,9 +73,13 @@ export default function SignUpPage() {
           )}
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="name-input" className="text-slate-200 font-semibold text-[13px]">Full Name</label>
+            <label htmlFor="name-input" className="text-slate-200 font-semibold text-[13px]">
+              Full Name
+            </label>
             <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
-              <span><FontAwesomeIcon icon={faUser} className="w-4 h-4 text-amber-500/70" /></span>
+              <span>
+                <FontAwesomeIcon icon={faUser} className="w-4 h-4 text-amber-500/70" />
+              </span>
               <input
                 type="text"
                 name="name"
@@ -80,9 +94,13 @@ export default function SignUpPage() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="email-input" className="text-slate-200 font-semibold text-[13px]">Email</label>
+            <label htmlFor="email-input" className="text-slate-200 font-semibold text-[13px]">
+              Email
+            </label>
             <div className="w-full gap-2 flex items-center border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl px-4 py-[12px] focus-within:border-amber-400 transition-colors">
-              <span><FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-amber-500/70" /></span>
+              <span>
+                <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-amber-500/70" />
+              </span>
               <input
                 type="email"
                 name="Email"
@@ -97,9 +115,13 @@ export default function SignUpPage() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="password-input" className="text-slate-200 font-semibold text-[13px]">Password</label>
+            <label htmlFor="password-input" className="text-slate-200 font-semibold text-[13px]">
+              Password
+            </label>
             <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
-              <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
+              <span>
+                <FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" />
+              </span>
               <input
                 type="password"
                 name="password"
@@ -114,9 +136,13 @@ export default function SignUpPage() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="confpassword-input" className="text-slate-200 font-semibold text-[13px]">Confirm Password</label>
+            <label htmlFor="confpassword-input" className="text-slate-200 font-semibold text-[13px]">
+              Confirm Password
+            </label>
             <div className="flex items-center gap-2 px-4 w-full border border-amber-500/20 bg-slate-950/80 dark:bg-black/80 rounded-xl py-[12px] focus-within:border-amber-400 transition-colors">
-              <span><FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" /></span>
+              <span>
+                <FontAwesomeIcon icon={faLock} className="w-4 h-4 text-amber-500/70" />
+              </span>
               <input
                 type="password"
                 name="confirm_password"
@@ -132,9 +158,10 @@ export default function SignUpPage() {
 
           <button
             type="submit"
-            className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-amber-500 bg-amber-500 px-6 text-[15px] font-bold leading-[155%] text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] active:translate-y-0 active:scale-[0.98]"
+            disabled={loading}
+            className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl border border-amber-500 bg-amber-500 px-6 text-[15px] font-bold leading-[155%] text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span>Create Account</span>
+            <span>{loading ? "Creating Account..." : "Create Account"}</span>
           </button>
 
           <div className="flex w-full items-center gap-3">
