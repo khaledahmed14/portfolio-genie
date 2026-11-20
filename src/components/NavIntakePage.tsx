@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useIntake } from "../context/IntakeContext";
+import { removeToken } from "../utils/storage";
 import type { WelcomeUser } from "../types/portfolio";
 
 interface WelcomeBannerProps {
@@ -6,18 +9,32 @@ interface WelcomeBannerProps {
   onLogout?: () => void;
 }
 
-const DEFAULT_USER: WelcomeUser = { name: "Developer", handle: "alex-dev" };
+const FALLBACK_NAME = "Developer";
 
-export default function WelcomeBanner({
-  user = DEFAULT_USER,
-  setCurrentStep,
-  onLogout,
-}: WelcomeBannerProps) {
-  const initial = (user.handle || user.name || "?").charAt(0).toUpperCase();
+function extractHandle(profileUrl: string): string {
+  const value = profileUrl.trim();
+  if (!value) return "";
+  try {
+    const candidate = /^[a-z][a-z\d+.-]*:/i.test(value) ? value : `https://${value}`;
+    const url = new URL(candidate);
+    return url.pathname.split("/").filter(Boolean)[0] ?? "";
+  } catch {
+    return "";
+  }
+}
+
+export default function WelcomeBanner({ user, onLogout }: WelcomeBannerProps) {
+  const navigate = useNavigate();
+  const { intake } = useIntake();
+
+  const name = user?.name || intake.name.trim() || FALLBACK_NAME;
+  const handle = user?.handle || extractHandle(intake.profileUrl);
+  const initial = (handle || name).charAt(0).toUpperCase();
 
   const handleLogout = (): void => {
-    if (onLogout) onLogout();
-    else setCurrentStep?.(1);
+    removeToken();
+    onLogout?.();
+    navigate("/auth", { replace: true });
   };
 
   return (
@@ -29,10 +46,10 @@ export default function WelcomeBanner({
           </div>
           <div className="min-w-0 text-left">
             <p className="truncate text-[17px] font-bold leading-tight text-venom-text">
-              Welcome back, {user.name}! 👋
+              Welcome back, {name}! 👋
             </p>
             <p className="truncate text-xs text-venom-muted">
-              Signed in as @{user.handle} via GitHub
+              {handle ? `Signed in as @${handle} via GitHub` : "Signed in via GitHub"}
             </p>
           </div>
         </div>

@@ -1,12 +1,14 @@
 import type { ComponentType } from "react";
+import { useIntake } from "../context/IntakeContext";
 import { usePortfolioConfig } from "../context/PortfolioConfigContext";
 import { formatStars } from "../utils/validators";
+import { getInitials, toMailto, toSafeUrl, toSocialUrl } from "../utils/Links";
 import type {
   ContactLink,
+  IntakeData,
   PortfolioToggles,
   Project,
   SectionProps,
-  SkillGroup,
 } from "../types/portfolio";
 
 const ALL_PROJECTS: Project[] = [
@@ -30,10 +32,10 @@ const monoFont = "font-mono";
 const sectionClass =
   "rounded-[20px] border border-venom-border bg-venom-card/60 backdrop-blur-md p-4 sm:p-5 transition-colors duration-300";
 
-const NAME = "Alex Chen";
-const ROLE = "Full-Stack React & Node.js Engineer";
-const BIO =
-  "Building scalable distributed systems with React, Node.js, and TypeScript. Passionate about UI design systems and developer tools. I turn product ideas into reliable, user-friendly experiences.";
+const PLACEHOLDER_NAME = "Your Name";
+const PLACEHOLDER_ROLE = "Your professional title";
+const PLACEHOLDER_BIO =
+  "Write a short bio in the Intake step and it will appear here instantly.";
 
 interface SectionHeaderProps {
   number: number;
@@ -64,16 +66,21 @@ function SectionHeader({ number, title, meta }: SectionHeaderProps) {
 }
 
 function HeroSection({ number }: SectionProps) {
+  const { intake } = useIntake();
+  const name = intake.name.trim() || PLACEHOLDER_NAME;
+  const role = intake.title.trim() || PLACEHOLDER_ROLE;
+  const mail = toMailto(intake.email);
+
   return (
     <section className={sectionClass}>
       <SectionHeader number={number} title="Hero / Intro" meta="top of page" />
       <div className="flex flex-col gap-3 pl-1 sm:flex-row sm:items-center sm:gap-3 sm:pl-9">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center self-start rounded-full bg-venom-gold text-xs font-bold text-slate-950 shadow-gold-glow-sm sm:self-center">
-          AC
+          {getInitials(intake.name)}
         </div>
         <div className="min-w-0">
-          <h3 className="text-[14px] font-semibold leading-5 text-venom-text">{NAME}</h3>
-          <p className="mt-1 text-xs leading-4 text-venom-muted">{ROLE}</p>
+          <h3 className="text-[14px] font-semibold leading-5 text-venom-text">{name}</h3>
+          <p className="mt-1 text-xs leading-4 text-venom-muted">{role}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             <a
               href="#featured-projects"
@@ -82,7 +89,7 @@ function HeroSection({ number }: SectionProps) {
               View Featured Work
             </a>
             <a
-              href="mailto:hello@example.com"
+              href={mail ?? "#contact"}
               className="rounded-full border border-venom-border bg-transparent px-3 py-1.5 text-[11px] leading-5 text-venom-text transition hover:border-venom-gold hover:bg-venom-gold/10 hover:text-venom-gold"
             >
               Get In Touch
@@ -95,10 +102,19 @@ function HeroSection({ number }: SectionProps) {
 }
 
 function AboutSection({ number }: SectionProps) {
+  const { intake } = useIntake();
+  const bio = intake.bio.trim();
+
   return (
     <section className={sectionClass}>
-      <SectionHeader number={number} title="About Me" meta={`${BIO.length} chars`} />
-      <p className="pl-1 text-xs leading-[1.7] text-venom-secondary sm:pl-9 sm:text-sm">{BIO}</p>
+      <SectionHeader number={number} title="About Me" meta={`${intake.bio.length} chars`} />
+      <p
+        className={`pl-1 text-xs leading-[1.7] sm:pl-9 sm:text-sm ${
+          bio ? "text-venom-secondary" : "text-venom-muted"
+        }`}
+      >
+        {bio || PLACEHOLDER_BIO}
+      </p>
     </section>
   );
 }
@@ -193,28 +209,24 @@ function ExperienceSection({ number }: SectionProps) {
   );
 }
 
-const SKILL_GROUPS: SkillGroup[] = [
-  { category: "Frontend Development", skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap", "Tailwind CSS"] },
-  { category: "Programming Languages", skills: ["Python", "C#", "JavaScript"] },
-  { category: "AI & Machine Learning", skills: ["Machine Learning", "Model Training", "Data Analysis"] },
-  { category: "Tools & Platforms", skills: ["Git", "GitHub", "VS Code", "Figma"] },
-];
-
 function SkillsSection({ number }: SectionProps) {
+  const { intake } = useIntake();
+  const skills = intake.skills.map((s) => s.trim()).filter(Boolean);
+
   return (
     <section id="technical-skills" className={sectionClass}>
-      <SectionHeader number={number} title="Technical Skills" meta="skills & tools" />
-      <div className="grid grid-cols-1 gap-3 pl-1 sm:grid-cols-2 sm:pl-9">
-        {SKILL_GROUPS.map((group) => (
-          <article
-            key={group.category}
-            className="rounded-[16px] border border-venom-border bg-venom-input p-3.5 transition hover:border-venom-gold/50"
-          >
-            <h3 className="mb-3 text-xs font-semibold text-venom-text">{group.category}</h3>
+      <SectionHeader number={number} title="Technical Skills" meta={`${skills.length} skills`} />
+      <div className="pl-1 sm:pl-9">
+        {skills.length === 0 ? (
+          <p className="text-xs text-venom-muted">
+            Add your skills in the Intake step and they will appear here.
+          </p>
+        ) : (
+          <article className="rounded-[16px] border border-venom-border bg-venom-input p-3.5 transition hover:border-venom-gold/50">
             <div className="flex flex-wrap gap-2">
-              {group.skills.map((skill) => (
+              {skills.map((skill, i) => (
                 <span
-                  key={skill}
+                  key={`${skill}-${i}`}
                   className={`rounded-full border border-venom-border bg-venom-gold/10 px-2.5 py-1.5 text-[10px] text-venom-gold ${monoFont}`}
                 >
                   {skill}
@@ -222,46 +234,115 @@ function SkillsSection({ number }: SectionProps) {
               ))}
             </div>
           </article>
-        ))}
+        )}
       </div>
     </section>
   );
 }
 
-const CONTACT_LINKS: ContactLink[] = [
-  { icon: "@", title: "Email", sub: "hello@example.com", href: "mailto:hello@example.com", external: false, breakAll: true },
-  { icon: "GH", title: "GitHub", sub: "View my repositories", href: "https://github.com/", external: true },
-  { icon: "in", title: "LinkedIn", sub: "Connect professionally", href: "https://www.linkedin.com/", external: true },
-  { icon: "X", title: "Social Profile", sub: "Follow my updates", href: "https://x.com/", external: true },
-];
+function buildContactLinks(intake: IntakeData): ContactLink[] {
+  const links: ContactLink[] = [];
+
+  const mail = toMailto(intake.email);
+  if (mail) {
+    links.push({
+      icon: "@",
+      title: "Email",
+      sub: intake.email.trim(),
+      href: mail,
+      external: false,
+      breakAll: true,
+    });
+  }
+
+  const github = toSafeUrl(intake.profileUrl);
+  if (github) {
+    links.push({
+      icon: "GH",
+      title: "GitHub",
+      sub: intake.profileUrl.trim(),
+      href: github,
+      external: true,
+      breakAll: true,
+    });
+  }
+
+  const linkedin = toSafeUrl(intake.linkedin);
+  if (linkedin) {
+    links.push({
+      icon: "in",
+      title: "LinkedIn",
+      sub: intake.linkedin.trim(),
+      href: linkedin,
+      external: true,
+      breakAll: true,
+    });
+  }
+
+  const twitter = toSocialUrl(intake.twitter, "x.com");
+  if (twitter) {
+    links.push({
+      icon: "X",
+      title: "Social Profile",
+      sub: intake.twitter.trim(),
+      href: twitter,
+      external: true,
+      breakAll: true,
+    });
+  }
+
+  const website = toSafeUrl(intake.website);
+  if (website) {
+    links.push({
+      icon: "🌐",
+      title: "Website",
+      sub: intake.website.trim(),
+      href: website,
+      external: true,
+      breakAll: true,
+    });
+  }
+
+  return links;
+}
 
 const inputClass =
   "w-full rounded-xl border border-venom-border bg-venom-card px-3 py-2 text-xs text-venom-text placeholder:text-venom-muted outline-none transition focus:border-venom-gold/60";
 
 function ContactSection({ number, toggles }: SectionProps) {
+  const { intake } = useIntake();
+  const contactLinks = buildContactLinks(intake);
+
   return (
     <section id="contact" className={sectionClass}>
       <SectionHeader number={number} title="Contact & Social Links" meta="let's connect" />
-      <div className="grid grid-cols-1 gap-2.5 pl-1 sm:grid-cols-2 sm:pl-9">
-        {CONTACT_LINKS.map((l) => (
-          <a
-            key={l.title}
-            href={l.href}
-            {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
-            className="flex items-center gap-3 rounded-[14px] border border-venom-border bg-venom-input p-3 transition hover:border-venom-gold/50"
-          >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-venom-gold/15 text-xs font-bold text-venom-gold">
-              {l.icon}
-            </span>
-            <span className="min-w-0">
-              <span className="block text-xs font-medium text-venom-text">{l.title}</span>
-              <span className={`block text-[11px] text-venom-muted ${l.breakAll ? "break-all" : ""}`}>
-                {l.sub}
+
+      {contactLinks.length === 0 ? (
+        <p className="pl-1 text-xs text-venom-muted sm:pl-9">
+          Add your email and social links in the Intake step and they will appear here.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-2.5 pl-1 sm:grid-cols-2 sm:pl-9">
+          {contactLinks.map((l) => (
+            <a
+              key={l.title}
+              href={l.href}
+              {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="flex items-center gap-3 rounded-[14px] border border-venom-border bg-venom-input p-3 transition hover:border-venom-gold/50"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-venom-gold/15 text-xs font-bold text-venom-gold">
+                {l.icon}
               </span>
-            </span>
-          </a>
-        ))}
-      </div>
+              <span className="min-w-0">
+                <span className="block text-xs font-medium text-venom-text">{l.title}</span>
+                <span className={`block text-[11px] text-venom-muted ${l.breakAll ? "break-all" : ""}`}>
+                  {l.sub}
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {toggles.showContactForm && (
         <form
