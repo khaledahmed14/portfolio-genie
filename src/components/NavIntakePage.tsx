@@ -5,7 +5,6 @@ import type { WelcomeUser } from "../types/portfolio";
 
 interface WelcomeBannerProps {
   user?: WelcomeUser;
-  setCurrentStep?: (step: number) => void;
   onLogout?: () => void;
 }
 
@@ -49,7 +48,7 @@ export default function WelcomeBanner({ user, onLogout }: WelcomeBannerProps) {
               Welcome back, {name}! 👋
             </p>
             <p className="truncate text-xs text-venom-muted">
-              {handle ? `Signed in as @${handle} via GitHub` : "Signed in via GitHub"}
+              {handle ? `Signed in as @${handle} via GitHub` : "Signed in"}
             </p>
           </div>
         </div>

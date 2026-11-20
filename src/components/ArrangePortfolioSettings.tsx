@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
+import { useIntake } from "../context/IntakeContext";
 import { usePortfolioConfig } from "../context/PortfolioConfigContext";
+import { fetchGithubProfile } from "../services/githubService";
 import { clamp } from "../utils/validators";
 import type {
   PortfolioConfig,
@@ -40,8 +42,44 @@ function resolve<T>(updater: Updater<T>, prev: T): T {
 }
 
 export default function Arrangesettings() {
+  const { intake } = useIntake();
   const { config, setConfig } = usePortfolioConfig();
   const { sections, projectCount: count, toggles } = config;
+  const [repoTotal, setRepoTotal] = useState<number>(0);
+
+  const profileInput = intake.profileUrl.trim();
+
+  useEffect(() => {
+    if (!profileInput) {
+      setRepoTotal(0);
+      return;
+    }
+
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      try {
+        const data = await fetchGithubProfile(profileInput);
+        if (!cancelled) {
+          setRepoTotal(data.repositories.length);
+        }
+      } catch {
+        if (!cancelled) {
+          setRepoTotal(0);
+        }
+      }
+    }, 400);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [profileInput]);
+
+  const maxAvailable = repoTotal > 0 ? Math.min(MAX_PROJECTS, repoTotal) : 0;
+  const effectiveCount =
+    maxAvailable > 0 ? Math.min(count, maxAvailable) : 0;
+  const sliderMin = maxAvailable > 0 ? MIN_PROJECTS : 0;
+  const sliderMax = maxAvailable > 0 ? maxAvailable : 1;
 
   const setSections = (updater: Updater<PortfolioSection[]>): void =>
     setConfig((prev: PortfolioConfig) => ({
@@ -159,7 +197,10 @@ export default function Arrangesettings() {
     };
   }, [dragId, setConfig]);
 
-  const ratio = (count - MIN_PROJECTS) / (MAX_PROJECTS - MIN_PROJECTS);
+  const ratio =
+    sliderMax > sliderMin
+      ? clamp((effectiveCount - sliderMin) / (sliderMax - sliderMin), 0, 1)
+      : 0;
   const fill = `calc(${ratio} * (100% - 18px) + 9px)`;
 
   return (
@@ -256,8 +297,10 @@ export default function Arrangesettings() {
         <div className="flex justify-center items-center gap-2.5">
           <button
             type="button"
-            onClick={() => setCount((c) => clamp(c - 1, MIN_PROJECTS, MAX_PROJECTS))}
-            disabled={count <= MIN_PROJECTS}
+            onClick={() =>
+              setCount((c) => clamp(c - 1, MIN_PROJECTS, maxAvailable || MAX_PROJECTS))
+            }
+            disabled={maxAvailable === 0 || effectiveCount <= MIN_PROJECTS}
             className="h-9.5 w-9.5 flex justify-center items-center rounded-xl border border-venom-border bg-venom-gold/10 text-lg text-venom-text hover:bg-venom-gold/20 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
             −
@@ -265,10 +308,11 @@ export default function Arrangesettings() {
 
           <input
             type="range"
-            min={MIN_PROJECTS}
-            max={MAX_PROJECTS}
+            min={sliderMin}
+            max={sliderMax}
             step={1}
-            value={count}
+            value={effectiveCount}
+            disabled={maxAvailable === 0}
             onChange={(e) => setCount(Number(e.target.value))}
             style={{ "--v": fill } as React.CSSProperties}
             aria-label="Number of featured projects"
@@ -288,25 +332,28 @@ export default function Arrangesettings() {
               [&::-moz-range-track]:bg-transparent
 
               focus-visible:ring-2 focus-visible:ring-venom-gold/50
+              disabled:opacity-40 disabled:cursor-not-allowed
             "
           />
 
           <button
             type="button"
-            onClick={() => setCount((c) => clamp(c + 1, MIN_PROJECTS, MAX_PROJECTS))}
-            disabled={count >= MAX_PROJECTS}
+            onClick={() =>
+              setCount((c) => clamp(c + 1, MIN_PROJECTS, maxAvailable || MAX_PROJECTS))
+            }
+            disabled={maxAvailable === 0 || effectiveCount >= maxAvailable}
             className="h-9.5 w-9.5 flex justify-center items-center rounded-xl border border-venom-border bg-venom-gold/10 text-lg text-venom-text hover:bg-venom-gold/20 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
             +
           </button>
 
           <p className="min-w-[2ch] text-center font-extrabold text-[24px] text-venom-gold">
-            {count}
+            {effectiveCount}
           </p>
         </div>
 
         <p className="text-[12px] font-normal text-venom-muted">
-          Showing {count} of {MAX_PROJECTS} repositories, ranked by stars.
+          Showing {effectiveCount} of {maxAvailable} repositories, ranked by stars.
         </p>
       </section>
       <section className="flex flex-col gap-3">

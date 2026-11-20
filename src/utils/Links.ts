@@ -1,5 +1,6 @@
 const SCHEME_RE = /^[a-z][a-z\d+.-]*:/i;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function toSafeUrl(raw: string): string | null {
   const value = raw.trim();
   if (!value) return null;
@@ -16,7 +17,14 @@ export function toSafeUrl(raw: string): string | null {
 
 export function toSocialUrl(raw: string, host: string): string | null {
   const value = raw.trim();
-  if (value.startsWith("@")) return toSafeUrl(`${host}/${value.slice(1)}`);
+  if (!value) return null;
+  const cleanHost = host.trim().replace(/\/+$/, "");
+  if (!cleanHost) return null;
+
+  if (value.startsWith("@")) {
+    const handle = value.slice(1).trim().replace(/^\/+/, "");
+    return handle ? toSafeUrl(`${cleanHost}/${handle}`) : null;
+  }
   return toSafeUrl(value);
 }
 

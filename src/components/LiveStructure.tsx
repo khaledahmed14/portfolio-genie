@@ -1,30 +1,17 @@
-import type { ComponentType } from "react";
+import { useEffect, useState } from "react";
+import type { ComponentType, FormEvent } from "react";
 import { useIntake } from "../context/IntakeContext";
 import { usePortfolioConfig } from "../context/PortfolioConfigContext";
+import { fetchGithubProfile } from "../services/githubService";
 import { formatStars } from "../utils/validators";
 import { getInitials, toMailto, toSafeUrl, toSocialUrl } from "../utils/Links";
 import type {
   ContactLink,
   IntakeData,
   PortfolioToggles,
-  Project,
+  Repository,
   SectionProps,
 } from "../types/portfolio";
-
-const ALL_PROJECTS: Project[] = [
-  { name: "DevReview AI", stars: 1200, tech: "TypeScript" },
-  { name: "TaskSphere", stars: 486, tech: "React" },
-  { name: "Edge Cache Kit", stars: 212, tech: "Go" },
-  { name: "GraphQL Gateway", stars: 174, tech: "GraphQL" },
-  { name: "React Hooks Lab", stars: 158, tech: "React" },
-  { name: "pg-migrate CLI", stars: 121, tech: "Node.js" },
-  { name: "UI Kit Pro", stars: 98, tech: "Tailwind" },
-  { name: "Docker Starter", stars: 87, tech: "Docker" },
-  { name: "Auth Service", stars: 74, tech: "Node.js" },
-  { name: "Chart Studio", stars: 63, tech: "React" },
-  { name: "CLI Toolbox", stars: 51, tech: "Python" },
-  { name: "Notes Sync", stars: 39, tech: "Next.js" },
-];
 
 const mainFont = "font-sans";
 const monoFont = "font-mono";
@@ -120,44 +107,105 @@ function AboutSection({ number }: SectionProps) {
 }
 
 function ProjectsSection({ number, projectCount, toggles }: SectionProps) {
-  const projects = [...ALL_PROJECTS]
+  const { intake } = useIntake();
+  const [repos, setRepos] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const profileInput = intake.profileUrl.trim();
+
+  useEffect(() => {
+    if (!profileInput) {
+      setRepos([]);
+      setError("");
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await fetchGithubProfile(profileInput);
+        if (!cancelled) {
+          setRepos(data.repositories);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setRepos([]);
+          setError(
+            err instanceof Error ? err.message : "Could not load GitHub projects."
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }, 400);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [profileInput]);
+
+  const visibleRepos = [...repos]
     .sort((a, b) => b.stars - a.stars)
-    .slice(0, projectCount);
+    .slice(0, Math.max(1, projectCount));
 
   return (
     <section id="featured-projects" className={sectionClass}>
       <SectionHeader
         number={number}
         title="Featured GitHub Projects"
-        meta={`${projects.length} cards · stars ${toggles.showStars ? "on" : "off"} · badges ${
+        meta={`${visibleRepos.length} cards · stars ${toggles.showStars ? "on" : "off"} · badges ${
           toggles.showBadges ? "on" : "off"
         }`}
       />
-      <div className="grid grid-cols-1 gap-2.5 pl-1 sm:grid-cols-2 sm:pl-9 lg:grid-cols-3">
-        {projects.map((project) => (
-          <article
-            key={project.name}
-            className="flex min-h-[106px] flex-col items-start rounded-[16px] border border-venom-border bg-venom-input p-3.5 transition hover:border-venom-gold/50 hover:shadow-lg hover:shadow-venom-gold/5"
-          >
-            <h3 className="text-xs font-medium leading-5 text-venom-text sm:text-[13px]">
-              {project.name}
-            </h3>
-            {toggles.showStars && (
-              <p className="mt-2 flex items-center gap-1 text-[11px] text-venom-gold">
-                <span aria-hidden="true">★</span>
-                {formatStars(project.stars)}
-              </p>
-            )}
-            {toggles.showBadges && (
-              <span
-                className={`mt-2 inline-flex rounded-full bg-venom-gold/15 px-2.5 py-1 text-[11px] leading-4 text-venom-gold ${monoFont}`}
-              >
-                {project.tech}
-              </span>
-            )}
-          </article>
-        ))}
-      </div>
+
+      {!profileInput ? (
+        <p className="pl-1 text-xs text-venom-muted sm:pl-9">
+          Add your GitHub profile URL or username in the Intake step to load your live repositories.
+        </p>
+      ) : loading ? (
+        <p className="pl-1 text-xs text-venom-muted sm:pl-9">
+          Fetching GitHub repositories...
+        </p>
+      ) : error ? (
+        <p className="pl-1 text-xs text-red-400 sm:pl-9">{error}</p>
+      ) : visibleRepos.length === 0 ? (
+        <p className="pl-1 text-xs text-venom-muted sm:pl-9">
+          No public repositories found for this profile.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-2.5 pl-1 sm:grid-cols-2 sm:pl-9 lg:grid-cols-3">
+          {visibleRepos.map((repo) => (
+            <article
+              key={repo.name}
+              className="flex min-h-[106px] flex-col items-start rounded-[16px] border border-venom-border bg-venom-input p-3.5 transition hover:border-venom-gold/50 hover:shadow-lg hover:shadow-venom-gold/5"
+            >
+              <h3 className="text-xs font-medium leading-5 text-venom-text sm:text-[13px]">
+                {repo.name}
+              </h3>
+              {toggles.showStars && (
+                <p className="mt-2 flex items-center gap-1 text-[11px] text-venom-gold">
+                  <span aria-hidden="true">★</span>
+                  {formatStars(repo.stars)}
+                </p>
+              )}
+              {toggles.showBadges && (
+                <span
+                  className={`mt-2 inline-flex rounded-full bg-venom-gold/15 px-2.5 py-1 text-[11px] leading-4 text-venom-gold ${monoFont}`}
+                >
+                  {repo.language}
+                </span>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
@@ -312,6 +360,12 @@ const inputClass =
 function ContactSection({ number, toggles }: SectionProps) {
   const { intake } = useIntake();
   const contactLinks = buildContactLinks(intake);
+  const [sent, setSent] = useState<boolean>(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSent(true);
+  };
 
   return (
     <section id="contact" className={sectionClass}>
@@ -346,7 +400,7 @@ function ContactSection({ number, toggles }: SectionProps) {
 
       {toggles.showContactForm && (
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
           className="mt-3 grid gap-2.5 pl-1 sm:pl-9"
         >
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
@@ -354,12 +408,19 @@ function ContactSection({ number, toggles }: SectionProps) {
             <input type="email" placeholder="Your email" className={inputClass} />
           </div>
           <textarea rows={3} placeholder="Your message" className={`${inputClass} resize-none`} />
-          <button
-            type="submit"
-            className="self-start rounded-xl bg-venom-gold px-4 py-2 text-xs font-semibold text-slate-950 transition hover:bg-venom-gold-hover cursor-pointer"
-          >
-            Send message
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="submit"
+              className="rounded-xl bg-venom-gold px-4 py-2 text-xs font-semibold text-slate-950 transition hover:bg-venom-gold-hover cursor-pointer"
+            >
+              Send message
+            </button>
+            {sent && (
+              <span className="text-xs text-venom-gold">
+                Preview message ready (demo form).
+              </span>
+            )}
+          </div>
         </form>
       )}
     </section>
