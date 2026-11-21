@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import AppLayout from "./layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthPage from "./pages/AuthPage";
-import ForgotPassword from "./pages/ForgotPasswordPage";
-import ForgotPasswordSuccess from "./pages/ForgotPasswordSuccessPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ForgotPasswordSuccessPage from "./pages/ForgotPasswordSuccessPage";
 import SignUpPage from "./pages/SignUpPage";
 import IntakePage from "./pages/IntakePage";
 import CustomizePage from "./pages/CustomizePage";
@@ -21,8 +21,8 @@ export default function App() {
         { index: true, element: <AuthPage /> },
         { path: "auth", element: <AuthPage /> },
         { path: "signup", element: <SignUpPage /> },
-        { path: "forgot-password", element: <ForgotPassword /> },
-        { path: "forgot-password-success", element: <ForgotPasswordSuccess /> },
+        { path: "forgot-password", element: <ForgotPasswordPage /> },
+        { path: "forgot-password-success", element: <ForgotPasswordSuccessPage /> },
         {
           element: <ProtectedRoute />,
           children: [

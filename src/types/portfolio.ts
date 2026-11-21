@@ -1,7 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
 
 /* ---------- Theme ---------- */
-export type Theme = "light" | "dark";
+import type { Theme } from "./common";
+export type { Theme } from "./common";
 
 export interface ThemeContextType {
   theme: Theme;

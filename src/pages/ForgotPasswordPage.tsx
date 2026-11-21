@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import type { ForgotPasswordState } from "../types/portfolio";
 
-export default function ForgotPassword() {
+export default function ForgotPasswordPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import type { ForgotPasswordState } from "../types/portfolio";
 
-export default function ForgotPasswordSuccess() {
+export default function ForgotPasswordSuccessPage() {
   const location = useLocation();
   const state = location.state as ForgotPasswordState | null;
   const email = state?.email;

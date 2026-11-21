@@ -1,4 +1,5 @@
-export type ThemeMode = "light" | "dark";
+export type Theme = "light" | "dark";
+export type ThemeMode = Theme;
 
 export interface ApiResponse<T> {
   success: boolean;
